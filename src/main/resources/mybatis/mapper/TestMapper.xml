@@ -3,7 +3,7 @@
 <mapper namespace="com.labour.dao.TestDao">
 
     <select id="testSelect" resultType="com.labour.entity.TestUser" parameterType="java.lang.String">
-		select account_id,account,password FROM test_user where account_id=#{account_id};
+		select name,age FROM user where name=#{name};
 	</select>
 
 </mapper>

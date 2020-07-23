@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TestDao {
 
-    public TestUser testSelect(@Param("account_id")String account_id);
+    public TestUser testSelect(@Param("name")String name);
 
 }
