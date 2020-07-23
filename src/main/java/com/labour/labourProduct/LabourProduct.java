@@ -1,9 +1,9 @@
-package com.labour.lotteryProduct;
+package com.labour.labourProduct;
 
-import com.labour.entity.LotteryParams;
-import com.labour.entity.LotterySource;
+import com.labour.entity.LabourParams;
+import com.labour.entity.LabourSource;
 
-public abstract class LotteryProduct {
+public abstract class LabourProduct {
 
     //业务参数
     protected String merchantNo;//商户号
@@ -14,7 +14,7 @@ public abstract class LotteryProduct {
     protected String transamt;    //充值金额，默认以元为单位，一位小数（如10.0）
     protected String orderNo; //订单号
 
-    public void init(LotteryParams params){
+    public void init(LabourParams params){
         merchantNo = params.getMerchantNo();
         key = params.getKey();
         publicKey = params.getPublicKey();
@@ -24,5 +24,5 @@ public abstract class LotteryProduct {
         orderNo = params.getOrderNo();
     }
 
-    public abstract LotterySource method();
+    public abstract LabourSource method();
 }

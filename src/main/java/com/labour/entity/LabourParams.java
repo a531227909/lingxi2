@@ -1,6 +1,6 @@
 package com.labour.entity;
 
-public class LotteryParams {
+public class LabourParams {
 
     //业务参数
     public String merchantNo;//商户号
@@ -69,7 +69,7 @@ public class LotteryParams {
 
     @Override
     public String toString() {
-        return "LotteryParams{" +
+        return "LabourParams{" +
                 "merchantNo='" + merchantNo + '\'' +
                 ", key='" + key + '\'' +
                 ", publicKey='" + publicKey + '\'' +
@@ -79,5 +79,4 @@ public class LotteryParams {
                 ", orderNo='" + orderNo + '\'' +
                 '}';
     }
-
 }

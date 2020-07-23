@@ -21,6 +21,6 @@ import org.springframework.stereotype.Component;
 @Component
 public @interface Plugin {
 
-    public String lotteryType();
+    public String labourType();
 
 }

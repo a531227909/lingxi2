@@ -6,6 +6,6 @@ public interface TestService {
 
     public Result testdoLogin(String account_id);
 
-    public Result testLottery();
+    public Result testLabour();
 
 }

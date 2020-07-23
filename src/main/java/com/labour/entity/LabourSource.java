@@ -1,6 +1,6 @@
 package com.labour.entity;
 
-public class LotterySource {
+public class LabourSource {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,19 +1,19 @@
-package com.labour.plugins.lotteryResult;
+package com.labour.plugins.labourResult;
 
 import com.labour.entity.Result;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class AbstractLotteryResultPlugin implements LotteryReulstPlugin {
+public class AbstractLabourResultPlugin implements LabourReulstPlugin {
 
-    protected String lotteryType;
+    protected String labourType;
 
     /**
      * 初始化必要参数
      */
     public void init(){
-        lotteryType = "testDoLottery1";
+        labourType = "testDoLabour1";
     }
 
     public Result hanld() {
@@ -37,12 +37,12 @@ public class AbstractLotteryResultPlugin implements LotteryReulstPlugin {
         for (Method actionMethod : actionMethods) {
             actionMethod.setAccessible(true);
             if (actionMethod.isAnnotationPresent(MethodMapper.class)) {
-                String lotteryType = actionMethod.getAnnotation(MethodMapper.class).type();
-                String lotteryName = actionMethod.getAnnotation(MethodMapper.class).name();
-                if (this.lotteryType.equals(lotteryType)) {
+                String labourType = actionMethod.getAnnotation(MethodMapper.class).type();
+                String labourName = actionMethod.getAnnotation(MethodMapper.class).name();
+                if (this.labourType.equals(labourType)) {
                     methodInfo = new MethodInfo();
                     methodInfo.setClazz(clazz);
-                    methodInfo.setlotteryName(lotteryName);
+                    methodInfo.setLabourName(labourName);
                     methodInfo.setMethod(actionMethod);
                     break;
                 }

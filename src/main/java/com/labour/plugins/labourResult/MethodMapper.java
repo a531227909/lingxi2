@@ -1,4 +1,4 @@
-package com.labour.plugins.lotteryResult;
+package com.labour.plugins.labourResult;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

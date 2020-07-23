@@ -1,7 +1,7 @@
 package com.labour.concreteFactory;
 
-import com.labour.lotteryProduct.LotteryProduct;
+import com.labour.labourProduct.LabourProduct;
 
 public abstract class Factory {
-    public abstract <T extends LotteryProduct> T createProduct(Class<T> cls);
+    public abstract <T extends LabourProduct> T createProduct(Class<T> cls);
 }

@@ -22,11 +22,11 @@ public class TestController {
         return result;
     }
 
-    @RequestMapping(value="/testLottery")
+    @RequestMapping(value="/testLabour")
     @ResponseBody
-    public Result testLottery(){
+    public Result testLabour(){
         Result result = new Result();
-        result = testService.testLottery();
+        result = testService.testLabour();
         return result;
     }
 
