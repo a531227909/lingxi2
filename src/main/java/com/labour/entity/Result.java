@@ -8,7 +8,7 @@ public class Result implements Serializable {
 
     private String code;
     private String msg;
-    private Object data;
+    private Object datas;
     /**
      * @return the code
      */
@@ -33,24 +33,21 @@ public class Result implements Serializable {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-    /**
-     * @return the data
-     */
-    public Object getData() {
-        return data;
+
+    public Object getDatas() {
+        return datas;
     }
-    /**
-     * @param data the data to set
-     */
-    public void setData(Object data) {
-        this.data = data;
+
+    public void setDatas(Object datas) {
+        this.datas = datas;
     }
 
     @Override
     public String toString() {
-        return "Result [code=" + code + ", msg=" + msg + ", data=" + data + "]";
+        return "Result{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", datas=" + datas +
+                '}';
     }
-
-
-
 }

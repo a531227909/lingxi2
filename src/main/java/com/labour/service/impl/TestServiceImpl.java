@@ -31,7 +31,7 @@ public class TestServiceImpl extends ApplicationObjectSupport implements TestSer
         TestUser data = testDao.testSelect(account_id);
         result.setCode(code);
         result.setMsg(msg);
-        result.setData(data);
+        result.setDatas(data);
         return result;
     }
 
