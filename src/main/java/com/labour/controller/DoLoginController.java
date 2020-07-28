@@ -1,7 +1,7 @@
 package com.labour.controller;
 
 import com.labour.entity.Result;
-import com.labour.service.TestService;
+import com.labour.service.LoginService;
 import com.labour.utils.VerificationCodeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,24 +21,15 @@ import java.util.Map;
 public class DoLoginController {
 
     @Resource
-    private TestService testService;
+    private LoginService loginService;
 
-    @RequestMapping(value="/dologin",method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(value="/dologin")
     @ResponseBody
-//    public Result login(@RequestBody String account_id){
-//        System.out.println(account_id);
-//        Result result = new Result();
-//        result = testService.testdoLogin(account_id);
-//        return result;
-//    }
-    public Result login(@RequestBody HashMap<String, String> map, HttpServletRequest req){
-        System.out.println(map.get("username"));
-        System.out.println(map.get("password"));
-        System.out.println(map.get("verificationCode"));
-        System.out.println(req.getSession().getAttribute("verificationCode"));
-        String account_id = map.get("account_id");
+    public Result login(String user_id, String password){
+        System.out.println(user_id);
+        System.out.println(password);
         Result result = new Result();
-        result = testService.testdoLogin(map.get("account_id"));
+        result = loginService.doLogin(user_id);
         return result;
     }
 

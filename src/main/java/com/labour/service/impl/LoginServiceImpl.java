@@ -1,14 +1,14 @@
 package com.labour.service.impl;
 
-import com.labour.dao.TestDao;
+import com.labour.dao.LoginDao;
 import com.labour.entity.Result;
-import com.labour.entity.TestUser;
+import com.labour.entity.User;
 import com.labour.plugins.LabourPluginFactory;
+import com.labour.plugins.Plugin;
 import com.labour.plugins.labourResult.LabourReulstPlugin;
-import com.labour.service.TestService;
+import com.labour.service.LoginService;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Service;
-import com.labour.plugins.Plugin;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -18,17 +18,18 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class TestServiceImpl extends ApplicationObjectSupport implements TestService {
+public class LoginServiceImpl extends ApplicationObjectSupport implements LoginService {
 
     @Resource
-    private TestDao testDao;
+    private LoginDao loginDao;
 
     @Override
-    public Result testdoLogin(String account_id) {
+    public Result doLogin(String user_id) {
         Result result = new Result();
         String msg = "test";
         String code = "1";
-        TestUser data = testDao.testSelect(account_id);
+        User data = loginDao.selectUser(user_id);
+        System.out.println(data);
         result.setCode(code);
         result.setMsg(msg);
         result.setDatas(data);

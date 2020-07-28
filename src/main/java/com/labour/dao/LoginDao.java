@@ -1,12 +1,12 @@
 package com.labour.dao;
 
-import com.labour.entity.TestUser;
+import com.labour.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TestDao {
+public interface LoginDao {
 
-    public TestUser testSelect(@Param("name")String name);
+    public User selectUser(@Param("user_id") String user_id);
 
 }

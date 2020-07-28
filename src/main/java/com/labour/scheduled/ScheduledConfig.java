@@ -1,6 +1,6 @@
 //package com.labour.scheduled;
 //
-//import com.labour.service.TestService;
+//import com.labour.service.LoginService;
 //import org.springframework.scheduling.annotation.Scheduled;
 //import org.springframework.stereotype.Component;
 //
@@ -10,11 +10,11 @@
 //public class ScheduledConfig {
 //
 //    @Resource
-//    private TestService testService;
+//    private LoginService loginService;
 //
 //    @Scheduled(cron = "0/2 * * * * ?") // 每2秒执行一次
 //    public void schedulerKenoResultJob(){
-//        testService.testLabour();
+//        loginService.testLabour();
 //    }
 //
 //}

@@ -2,9 +2,9 @@ package com.labour.service;
 
 import com.labour.entity.Result;
 
-public interface TestService {
+public interface LoginService {
 
-    public Result testdoLogin(String account_id);
+    public Result doLogin(String user_id);
 
     public Result testLabour();
 
