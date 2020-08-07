@@ -25,11 +25,9 @@ public class DoLoginController {
 
     @RequestMapping(value="/dologin")
     @ResponseBody
-    public Result login(String user_id, String password){
-        System.out.println(user_id);
-        System.out.println(password);
+    public Result login(String user_name, String password, String verification){
         Result result = new Result();
-        result = loginService.doLogin(user_id);
+        result = loginService.doLogin(user_name, password, verification);
         return result;
     }
 

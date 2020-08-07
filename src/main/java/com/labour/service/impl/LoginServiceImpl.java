@@ -24,11 +24,11 @@ public class LoginServiceImpl extends ApplicationObjectSupport implements LoginS
     private LoginDao loginDao;
 
     @Override
-    public Result doLogin(String user_id) {
+    public Result doLogin(String user_name, String password, String verification) {
         Result result = new Result();
         String msg = "test";
         String code = "1";
-        User data = loginDao.selectUser(user_id);
+        User data = loginDao.selectUser(user_name, password);
         System.out.println(data);
         result.setCode(code);
         result.setMsg(msg);
