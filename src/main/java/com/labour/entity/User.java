@@ -22,6 +22,8 @@ public class User implements Serializable {
 
     private String status;
 
+    private String token;
+
     public String getUser_id() {
         return user_id;
     }
@@ -94,6 +96,14 @@ public class User implements Serializable {
         this.status = status;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -106,6 +116,8 @@ public class User implements Serializable {
                 ", create_time='" + create_time + '\'' +
                 ", update_time='" + update_time + '\'' +
                 ", status='" + status + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
+
 }

@@ -4,7 +4,7 @@
 
     <select id="selectUser" resultType="com.labour.entity.User" parameterType="java.lang.String">
 		select user_id,user_name,password,name,create_user_id,create_user_name,create_time,update_time,status FROM user
-		where user_id=#{user_id};
+		where user_name=#{user_name};
 	</select>
 
 </mapper>

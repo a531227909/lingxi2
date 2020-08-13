@@ -7,6 +7,10 @@ import com.labour.plugins.LabourPluginFactory;
 import com.labour.plugins.Plugin;
 import com.labour.plugins.labourResult.LabourReulstPlugin;
 import com.labour.service.LoginService;
+import com.labour.utils.Md5Utils;
+import com.labour.utils.TokenUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -20,19 +24,32 @@ import java.util.Map;
 @Service
 public class LoginServiceImpl extends ApplicationObjectSupport implements LoginService {
 
+    private static Logger logger = LogManager.getLogger("org.springframework");
+
     @Resource
     private LoginDao loginDao;
 
     @Override
-    public Result doLogin(String user_name, String password, String verification) {
+    public Result doLogin(String user_name, String password, String ip) {
         Result result = new Result();
-        String msg = "test";
-        String code = "1";
-        User data = loginDao.selectUser(user_name, password);
-        System.out.println(data);
-        result.setCode(code);
-        result.setMsg(msg);
-        result.setDatas(data);
+        User user = loginDao.selectUser(user_name);
+        if(user ==null || "".equals(user)){
+            result.setCode("1001");
+            result.setMsg("账号不存在");
+            return result;
+        }
+        if(Md5Utils.string2Md5(password).equals(user.getPassword())){
+            String token = TokenUtils.token(user_name, password);
+            user.setToken(token);
+            user.setPassword("");
+            result.setCode("1000");
+            result.setMsg("登录成功");
+            result.setDatas(user);
+            logger.info("用户:"+user_name+"登陆成功  IP:"+ip);
+        }else{
+            result.setCode("1001");
+            result.setMsg("您的账号或密码有误");
+        }
         return result;
     }
 

@@ -49,5 +49,9 @@ public class Md5Utils {
         String md5 = string2Md5(str);
         return md5.substring(8, 24);
     }
+
+    public static void main(String[] args) {
+        System.out.println(string2Md5("123456"));
+    }
     
 }
