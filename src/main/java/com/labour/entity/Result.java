@@ -8,7 +8,7 @@ public class Result implements Serializable {
 
     private String code;
     private String msg;
-    private Object datas;
+    private Object data;
     /**
      * @return the code
      */
@@ -34,12 +34,12 @@ public class Result implements Serializable {
         this.msg = msg;
     }
 
-    public Object getDatas() {
-        return datas;
+    public Object getData() {
+        return data;
     }
 
-    public void setDatas(Object datas) {
-        this.datas = datas;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Result implements Serializable {
         return "Result{" +
                 "code='" + code + '\'' +
                 ", msg='" + msg + '\'' +
-                ", datas=" + datas +
+                ", data=" + data +
                 '}';
     }
 }

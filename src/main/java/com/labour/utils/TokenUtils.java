@@ -60,11 +60,11 @@ public class TokenUtils {
         }
     }
     public static void main(String[] args) {
-        String username ="zhangsan";
-        String password = "123";
+        String username ="admin";
+        String password = "123456";
         String token = token(username,password);
         System.out.println(token);
-        boolean b = verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMyIsImV4cCI6MTU5NzMxMDM2MCwidXNlcm5hbWUiOiJ6aGFuZ3NhbiJ9.itiqTtETNv887lboCaNVV1xL9b2S7a4J2IYar95U_XQ");
+        boolean b = verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImV4cCI6MTU5NzQ4MDAxNiwidXNlcm5hbWUiOiJhZG1pbiJ9.NyCtBX1mrc22YHuERAPfmFnQY_gbLtlnPwCSSB4kQi0");
         System.out.println(b);
     }
 }

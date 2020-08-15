@@ -44,7 +44,7 @@ public class LoginServiceImpl extends ApplicationObjectSupport implements LoginS
             user.setPassword("");
             result.setCode("1000");
             result.setMsg("登录成功");
-            result.setDatas(user);
+            result.setData(user);
             logger.info("用户:"+user_name+"登陆成功  IP:"+ip);
         }else{
             result.setCode("1001");

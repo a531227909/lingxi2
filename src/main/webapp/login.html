@@ -11,8 +11,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/materialdesignicons.min.css" rel="stylesheet">
 <link href="css/style.min.css" rel="stylesheet">
-<script type="text/javascript" src="public/login/doLogin.js" ></script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="public/login/doLogin.js" ></script>
 <style>
 .lyear-wrapper {
     position: relative;
@@ -70,7 +70,7 @@
         </div>
         <div class="form-group has-feedback feedback-left row">
           <div class="col-xs-7">
-            <input type="text" name="verificationCode" id="verificationCode" class="form-control" placeholder="验证码">
+            <input type="text" name="verifycode" id="verifycode" class="form-control" placeholder="验证码">
             <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
           </div>
           <div class="col-xs-5">
@@ -78,7 +78,8 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-block btn-primary" type="button" onclick="doLogin($('#username').val(),$('#password').val(),$('#verificationCode').val())">立即登录</button>
+          <button class="btn btn-block btn-primary" type="button" onclick="doLogin($('#username').val(),$('#password').val(),$('#verifycode').val())">立即登录</button>
+          <button class="btn btn-block btn-primary" type="button" onclick="test007()">立即登录</button>
         </div>
       </form>
       <hr>
@@ -88,7 +89,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">;</script>
 </body>
