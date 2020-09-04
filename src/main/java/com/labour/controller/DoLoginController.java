@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -82,6 +81,14 @@ public class DoLoginController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(value="/selectAllUser")
+    @ResponseBody
+    public Result selectAllUser(String data){
+        Result result = new Result();
+        result = loginService.selectAllUser(data);
+        return result;
     }
 
 }

@@ -3,25 +3,49 @@ package com.labour.entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-
+    /**
+     * 用户自增ID
+     */
     private String user_id;
-
+    /**
+     * 用户名
+     */
     private String user_name;
-
+    /**
+     *密码
+     */
     private String password;
-
+    /**
+     * 名称
+     */
     private String name;
-
+    /**
+     * 用户类型(岗位)
+     */
+    private String user_type;
+    /**
+     * 创建用户ID
+     */
     private String create_user_id;
-
+    /**
+     * 创建用户名
+     */
     private String create_user_name;
-
+    /**
+     * 创建时间
+     */
     private String create_time;
-
+    /**
+     * 更新时间
+     */
     private String update_time;
-
+    /**
+     * 状态 0:停用 1:启用
+     */
     private String status;
-
+    /**
+     * token
+     */
     private String token;
 
     public String getUser_id() {
@@ -38,6 +62,14 @@ public class User implements Serializable {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 
     public String getPassword() {
@@ -111,6 +143,7 @@ public class User implements Serializable {
                 ", user_name='" + user_name + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", user_type='" + user_type + '\'' +
                 ", create_user_id='" + create_user_id + '\'' +
                 ", create_user_name='" + create_user_name + '\'' +
                 ", create_time='" + create_time + '\'' +
@@ -119,5 +152,4 @@ public class User implements Serializable {
                 ", token='" + token + '\'' +
                 '}';
     }
-
 }

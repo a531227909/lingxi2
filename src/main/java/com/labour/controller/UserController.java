@@ -2,6 +2,7 @@ package com.labour.controller;
 
 import com.labour.entity.Result;
 import com.labour.service.LoginService;
+import com.labour.service.UserService;
 import com.labour.utils.HttpRequestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class UserController {
 
     @Resource
     private LoginService loginService;
+
+    @Resource
+    private UserService userService;
 
     @RequestMapping(value="/selectUserByPage")
     @ResponseBody
@@ -46,12 +50,45 @@ public class UserController {
         }
         return result;
     }
-    @RequestMapping(value="/test007")
+
+    @RequestMapping(value="/addOneUser")
     @ResponseBody
-    public Result test007(){
+    public Result addOneUser(String user_name, String password, String name, String user_type, String create_user_id, String create_user_name){
         Result result = new Result();
-        result.setCode("1000");
-        result.setMsg("test007");
+        if(StringUtils.isBlank(user_name)){
+            result.setCode("1001");
+            result.setMsg("用户名不能为空");
+            return result;
+        }else if(StringUtils.isBlank(password)){
+            result.setCode("1001");
+            result.setMsg("密码不能为空");
+            return result;
+        }else if(StringUtils.isBlank(name)){
+            result.setCode("1001");
+            result.setMsg("名字不能为空");
+            return result;
+        }else if(StringUtils.isBlank(user_type)){
+            result.setCode("1001");
+            result.setMsg("用户类型不能为空");
+            return result;
+        }else if(StringUtils.isBlank(create_user_id)){
+            result.setCode("1001");
+            result.setMsg("创建者ID不能为空");
+            return result;
+        }else if(StringUtils.isBlank(create_user_name)){
+            result.setCode("1001");
+            result.setMsg("创建者用户名不能为空");
+            return result;
+        }
+        result = userService.addOneUser(user_name, password, name, user_type,create_user_id, create_user_name);
+        return result;
+    }
+
+    @RequestMapping(value="/selectAllUserType")
+    @ResponseBody
+    public Result selectAllUserType(){
+        Result result = new Result();
+        result = userService.selectAllUserType();
         return result;
     }
 

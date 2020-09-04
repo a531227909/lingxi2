@@ -1,6 +1,7 @@
 package com.labour.service.impl;
 
 import com.labour.dao.LoginDao;
+import com.labour.dao.UserDao;
 import com.labour.entity.Result;
 import com.labour.entity.User;
 import com.labour.plugins.LabourPluginFactory;
@@ -27,12 +28,12 @@ public class LoginServiceImpl extends ApplicationObjectSupport implements LoginS
     private static Logger logger = LogManager.getLogger("org.springframework");
 
     @Resource
-    private LoginDao loginDao;
+    private UserDao userDao;
 
     @Override
     public Result doLogin(String user_name, String password, String ip) {
         Result result = new Result();
-        User user = loginDao.selectUser(user_name);
+        User user = userDao.selectOneUser(user_name);
         if(user ==null || "".equals(user)){
             result.setCode("1001");
             result.setMsg("账号不存在");
@@ -50,6 +51,16 @@ public class LoginServiceImpl extends ApplicationObjectSupport implements LoginS
             result.setCode("1001");
             result.setMsg("您的账号或密码有误");
         }
+        return result;
+    }
+
+    @Override
+    public Result selectAllUser(String data) {
+        Result result = new Result();
+        List<User> users = userDao.selectAllUser();
+        result.setCode("1000");
+        result.setMsg(data);
+        result.setData(users);
         return result;
     }
 

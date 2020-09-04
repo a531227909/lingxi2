@@ -15,11 +15,7 @@ function doLogin(username,password,verifycode){
         success:function(data){
             var token = data.data.token;
             localStorage.setItem("lingxi_token", token);
-            $.ajaxSetup({ //发送请求前触发
-                beforeSend: function(xhr) { //可以设置自定义标头
-                    xhr.setRequestHeader('token', localStorage.getItem("lingxi_token"));
-                }
-            })
+            window.location.href="index.html";
         },
         error:function(data){
             alert("服务器异常，操作失败！")

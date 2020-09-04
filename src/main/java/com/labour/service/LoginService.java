@@ -8,4 +8,6 @@ public interface LoginService {
 
     public Result testLabour();
 
+    public Result selectAllUser(String data);
+
 }
