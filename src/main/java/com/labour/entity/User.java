@@ -22,7 +22,11 @@ public class User implements Serializable {
     /**
      * 用户类型(岗位)
      */
-    private String user_type;
+    private String user_type_id;
+    /**
+     * 用户类型(岗位)名称
+     */
+    private String user_type_name;
     /**
      * 创建用户ID
      */
@@ -64,14 +68,6 @@ public class User implements Serializable {
         this.user_name = user_name;
     }
 
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -86,6 +82,22 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUser_type_id() {
+        return user_type_id;
+    }
+
+    public void setUser_type_id(String user_type_id) {
+        this.user_type_id = user_type_id;
+    }
+
+    public String getUser_type_name() {
+        return user_type_name;
+    }
+
+    public void setUser_type_name(String user_type_name) {
+        this.user_type_name = user_type_name;
     }
 
     public String getCreate_user_id() {
@@ -143,7 +155,8 @@ public class User implements Serializable {
                 ", user_name='" + user_name + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", user_type='" + user_type + '\'' +
+                ", user_type='" + user_type_id + '\'' +
+                ", user_type_name='" + user_type_name + '\'' +
                 ", create_user_id='" + create_user_id + '\'' +
                 ", create_user_name='" + create_user_name + '\'' +
                 ", create_time='" + create_time + '\'' +

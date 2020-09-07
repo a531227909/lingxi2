@@ -1,6 +1,5 @@
 package com.labour.service.impl;
 
-import com.labour.dao.LoginDao;
 import com.labour.dao.UserDao;
 import com.labour.entity.Result;
 import com.labour.entity.User;

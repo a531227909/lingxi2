@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.labour.dao.TAreaDao">
+
+	<select id="selectAreaByLevel" resultType="com.labour.entity.TArea" parameterType="java.lang.String">
+		select areaId, areaCode, areaName, level, cityCode, center, parentId FROM t_area
+		where level=#{level};
+	</select>
+
+	<select id="selectAreaByParentId" resultType="com.labour.entity.TArea" parameterType="java.lang.String">
+		select areaId, areaCode, areaName, level, cityCode, center, parentId FROM t_area
+		where parentId=#{parentId};
+	</select>
+
+</mapper>

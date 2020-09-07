@@ -1,6 +1,7 @@
 package com.labour.service.impl;
 
 import com.labour.dao.UserDao;
+import com.labour.entity.Company;
 import com.labour.entity.Result;
 import com.labour.entity.User;
 import com.labour.entity.UserType;
@@ -24,16 +25,31 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
     private UserDao userDao;
 
     @Override
-    public Result addOneUser(String user_name, String password, String name, String user_type, String create_user_id, String create_user_name) {
+    public Result addOneUser(String user_name, String password, String name, String user_type_id, String company_id, String create_user_id, String create_user_name) {
         Result result = new Result();
         User user = userDao.selectOneUser(user_name);
-        if(user!=null){
+        if(user != null){
             result.setCode("1001");
             result.setMsg("添加失败，用户已存在");
             return result;
         }
-        int i = userDao.addOneUser(user_name, Md5Utils.string2Md5(password), name, user_type, create_user_id, create_user_name, "1");
+        Company company = userDao.selectOneCompany(company_id);
+        if(company == null){
+            result.setCode("1001");
+            result.setMsg("添加失败，公司ID不存在");
+            return result;
+        }
+        int i = userDao.addOneUser(user_name, Md5Utils.string2Md5(password), name, user_type_id, create_user_id, create_user_name, "1");
         if(i == 1){
+            User acount = userDao.selectOneUser(user_name);
+            int j = userDao.addUserCompany(acount.getUser_id(), acount.getUser_name(), company_id, company.getCompany_name());
+            if(j == 1){
+                result.setCode("1000");
+                result.setMsg("添加用户成功");
+            }else{
+                result.setCode("1001");
+                result.setMsg("系统故障，添加用户公司失败");
+            }
             result.setCode("1000");
             result.setMsg("添加用户成功");
         }else{
@@ -51,6 +67,59 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
         result.setCode("1000");
         result.setMsg("查询成功");
         result.setData(userTypes);
+        return result;
+    }
+
+    @Override
+    public Result updatePassword(String user_name, String password) {
+        Result result = new Result();
+        User user = userDao.selectOneUser(user_name);
+        if(user == null){
+            result.setCode("1001");
+            result.setMsg("更新失败，用户不存在");
+            return result;
+        }
+        int i = userDao.updatePassword(user_name, Md5Utils.string2Md5(password));
+        if(i == 1){
+            result.setCode("1000");
+            result.setMsg("更改密码成功");
+        }else{
+            result.setCode("1001");
+            result.setMsg("系统故障，更改密码失败");
+        }
+        return result;
+    }
+
+    @Override
+    public Result updateStatus(String user_name, String status) {
+        Result result = new Result();
+        User user = userDao.selectOneUser(user_name);
+        if(user == null){
+            result.setCode("1001");
+            result.setMsg("更新失败，用户不存在");
+            return result;
+        }
+        int i = userDao.updateStatus(user_name, status);
+        if(i == 1){
+            result.setCode("1000");
+            result.setMsg("更新状态成功");
+        }else{
+            result.setCode("1001");
+            result.setMsg("系统故障，更改密码失败");
+        }
+        return result;
+    }
+
+    @Override
+    public Result selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page) {
+        Result result = new Result();
+        int star_num = (Integer.parseInt(page)-1)*10;
+        int pageSize = 10;
+        System.out.println(user_type_id);
+        List<User> users = userDao.selectUserByFactor(company_id, name, user_name, user_type_id, star_num, pageSize);
+        result.setCode("1000");
+        result.setMsg("查询成功");
+        result.setData(users);
         return result;
     }
 

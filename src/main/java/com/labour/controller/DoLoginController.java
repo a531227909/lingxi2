@@ -26,9 +26,9 @@ public class DoLoginController {
 
     @RequestMapping(value="/dologin")
     @ResponseBody
-    public Result login(HttpServletRequest req, String username, String password, String verifycode){
+    public Result login(HttpServletRequest req, String user_name, String password, String verifycode){
         Result result = new Result();
-        if(StringUtils.isBlank(username)){
+        if(StringUtils.isBlank(user_name)){
             result.setCode("1001");
             result.setMsg("用户名不能为空");
             return result;
@@ -41,16 +41,16 @@ public class DoLoginController {
             result.setMsg("验证码不能为空");
             return result;
         }
-        String key = (String) req.getSession().getAttribute("verifycode");
-        if(verifycode.equalsIgnoreCase(key)){
-            req.getSession().removeAttribute("verifycode");
+//        String key = (String) req.getSession().getAttribute("verifycode");
+//        if(verifycode.equalsIgnoreCase(key)){
+//            req.getSession().removeAttribute("verifycode");
             //获取登录的IP地址
             String ip = HttpRequestUtils.getIp2(req);
-            result = loginService.doLogin(username, password, ip);
-        }else{
-            result.setCode("1001");
-            result.setMsg("验证码错误");
-        }
+            result = loginService.doLogin(user_name, password, ip);
+//        }else{
+//            result.setCode("1001");
+//            result.setMsg("验证码错误");
+//        }
         return result;
     }
 

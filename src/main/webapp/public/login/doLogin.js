@@ -9,11 +9,11 @@ $(function(){
 function doLogin(username,password,verifycode){
     $.ajax({
         type: "POST",
-        url: "dologin",//接口地址
+        url: "http://124.71.107.164:8080/dologin",//接口地址
         dataType:"json",
-        data: 'username='+username+'&password='+password+'&verifycode='+verifycode,
+        data: 'user_name='+username+'&password='+password+'&verifycode='+verifycode,
         success:function(data){
-            var token = data.data.token;
+            alert(data);
             localStorage.setItem("lingxi_token", token);
             window.location.href="index.html";
         },
