@@ -10,6 +10,5 @@ public class Test {
         Class classN = Class.forName("com.labour.labourProduct.ConcreteProductB");
         LabourProduct product = factory.createProduct(classN);
         LabourSource ls = product.method();
-        System.out.println(ls.toString());
     }
 }

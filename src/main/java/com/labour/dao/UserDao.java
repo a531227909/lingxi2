@@ -15,13 +15,11 @@ public interface UserDao {
     public int addOneUser(@Param("user_name") String user_name,@Param("password") String password,@Param("name") String name,@Param("user_type_id") String user_type_id,
                           @Param("create_user_id") String create_user_id,@Param("create_user_name") String create_user_name, @Param("status") String status);
 
-    public int addUserCompany(@Param("user_id") String user_id,@Param("user_name") String user_name,@Param("company_id") String company_id,@Param("company_name") String company_name);
+    public int addUserCompany(@Param("user_id") String user_id,@Param("user_name") String user_name,@Param("company_id") String company_id,@Param("company_full_name") String company_full_name);
 
     public List<UserType> selectAllUserType();
 
     public User selectOneUser(@Param("user_name") String user_name);
-
-    public Company selectOneCompany(@Param("company_id") String company_id);
 
     public List<User> selectAllUser();
 

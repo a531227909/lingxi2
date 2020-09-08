@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.labour.dao.CompanyDao">
+
+	<select id="selectOneCompany" resultType="com.labour.entity.Company" parameterType="java.lang.String">
+		select company_id, company_full_name FROM company
+		where company_id=#{company_id};
+	</select>
+
+	<insert id="insertOneCompany" parameterType="java.lang.String">
+		INSERT INTO company (company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name, county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic)
+		VALUES (#{company_full_name}, #{company_name}, #{company_size}, #{contact}, #{contact_phone}, #{contact_position}, #{province_code}, #{province_name}, #{city_code}, #{city_name}, #{county_code}, #{county_name}, #{address}, #{company_profile}, #{company_business_license}, #{company_logo}, #{company_pic});
+	</insert>
+
+</mapper>

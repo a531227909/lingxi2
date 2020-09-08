@@ -10,7 +10,6 @@ public class TestLabourTowPlugin extends AbstractLabourResultPlugin {
 
     @MethodMapper(type = "testDoLabour1",name = "testDoLabour3")
     private Result excuteTestLabour(){
-        System.out.println("excuteTestDoLabour2");
         Result result = new Result();
         String msg = "test";
         String code = "1";

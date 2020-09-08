@@ -1,5 +1,6 @@
 package com.labour.service.impl;
 
+import com.labour.dao.CompanyDao;
 import com.labour.dao.UserDao;
 import com.labour.entity.Company;
 import com.labour.entity.Result;
@@ -24,6 +25,9 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
     @Resource
     private UserDao userDao;
 
+    @Resource
+    private CompanyDao companyDao;
+
     @Override
     public Result addOneUser(String user_name, String password, String name, String user_type_id, String company_id, String create_user_id, String create_user_name) {
         Result result = new Result();
@@ -33,7 +37,7 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
             result.setMsg("添加失败，用户已存在");
             return result;
         }
-        Company company = userDao.selectOneCompany(company_id);
+        Company company = companyDao.selectOneCompany(company_id);
         if(company == null){
             result.setCode("1001");
             result.setMsg("添加失败，公司ID不存在");
@@ -42,7 +46,7 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
         int i = userDao.addOneUser(user_name, Md5Utils.string2Md5(password), name, user_type_id, create_user_id, create_user_name, "1");
         if(i == 1){
             User acount = userDao.selectOneUser(user_name);
-            int j = userDao.addUserCompany(acount.getUser_id(), acount.getUser_name(), company_id, company.getCompany_name());
+            int j = userDao.addUserCompany(acount.getUser_id(), acount.getUser_name(), company_id, company.getCompany_full_name());
             if(j == 1){
                 result.setCode("1000");
                 result.setMsg("添加用户成功");
@@ -115,7 +119,6 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
         Result result = new Result();
         int star_num = (Integer.parseInt(page)-1)*10;
         int pageSize = 10;
-        System.out.println(user_type_id);
         List<User> users = userDao.selectUserByFactor(company_id, name, user_name, user_type_id, star_num, pageSize);
         result.setCode("1000");
         result.setMsg("查询成功");

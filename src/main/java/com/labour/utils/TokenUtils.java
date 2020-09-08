@@ -59,12 +59,4 @@ public class TokenUtils {
             return  false;
         }
     }
-    public static void main(String[] args) {
-        String username ="admin";
-        String password = "123456";
-        String token = token(username,password);
-        System.out.println(token);
-        boolean b = verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImV4cCI6MTU5NzQ4MDAxNiwidXNlcm5hbWUiOiJhZG1pbiJ9.NyCtBX1mrc22YHuERAPfmFnQY_gbLtlnPwCSSB4kQi0");
-        System.out.println(b);
-    }
 }
