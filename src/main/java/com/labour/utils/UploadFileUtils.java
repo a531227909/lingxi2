@@ -10,7 +10,6 @@ import java.util.List;
 public class UploadFileUtils {
 
     public String uploadFiles(List<MultipartFile> files, String path) {
-        System.out.println("uploadFiles:"+path);
         String fileNames = "";
         for (MultipartFile file : files) {
             if (StringUtils.isNotBlank(file.getOriginalFilename())) { // 通过获取文件名称来判断文件是否为空
