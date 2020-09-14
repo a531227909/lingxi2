@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public interface TAreaDao {
 
-    public List<TArea> selectAreaByLevel(String level);
+    List<TArea> selectAreaByLevel(String level);
 
-    public List<TArea> selectAreaByParentId(String parentId);
+    List<TArea> selectAreaByParentId(String parentId);
 
 }

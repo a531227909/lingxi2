@@ -8,14 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-/**
- * @des 彩果服务启动入口
- * @author Voldemort
- * @time 2019年08月13日16:18:20
- * @version 1.0
- */
 @Configuration
-@ComponentScan(basePackages = { "com.labour.dao","com.labour.controller","com.labour.entity",
+@ComponentScan(basePackages = { "com.labour.dao","com.labour.controller","com.labour.entity","com.labour.model",
         "com.labour.service","com.labour.plugins","com.labour.scheduled"})
 @MapperScan(basePackages = { "com.labour.dao" })
 @ServletComponentScan(basePackages = { "com.labour.filter" })

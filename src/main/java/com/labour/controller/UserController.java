@@ -1,6 +1,7 @@
 package com.labour.controller;
 
 import com.labour.entity.Result;
+import com.labour.model.PagesResult;
 import com.labour.service.LoginService;
 import com.labour.service.UserService;
 import com.labour.utils.HttpRequestUtils;
@@ -128,15 +129,15 @@ public class UserController {
 
     @RequestMapping(value="/selectUserByFactor")
     @ResponseBody
-    public Result selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page){
-        Result result = new Result();
+    public PagesResult selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page){
+        PagesResult pagesResult = new PagesResult();
         if(StringUtils.isBlank(page)){
-            result.setCode("1001");
-            result.setMsg("查询页码不能为空");
-            return result;
+            pagesResult.setCode("1001");
+            pagesResult.setMsg("查询页码不能为空");
+            return pagesResult;
         }
-        result = userService.selectUserByFactor(company_id, name, user_name, user_type_id, page);
-        return result;
+        pagesResult = userService.selectUserByFactor(company_id, name, user_name, user_type_id, page);
+        return pagesResult;
     }
 
 }

@@ -12,4 +12,36 @@
 		VALUES (#{company_full_name}, #{company_name}, #{company_size}, #{contact}, #{contact_phone}, #{contact_position}, #{province_code}, #{province_name}, #{city_code}, #{city_name}, #{county_code}, #{county_name}, #{address}, #{company_profile}, #{company_business_license}, #{company_logo}, #{company_pic});
 	</insert>
 
+	<select id="selectCompanyByFactor" resultType="com.labour.entity.Company" parameterType="java.lang.String">
+		SELECT company_id, company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name,
+		county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, create_time, update_time FROM company
+		<where>
+			<if test=" company_full_name !=null and company_full_name !='' ">
+				and company_full_name = #{company_full_name}
+			</if>
+			<if test=" company_id !=null and company_id !='' ">
+				and company_id = #{company_id}
+			</if>
+			<if test=" city_code !=null and city_code !='' ">
+				and city_code = #{city_code}
+			</if>
+		</where>
+		LIMIT #{star_num},#{pageSize}
+	</select>
+
+	<select id="selectCountByFactor" resultType="java.lang.Integer" parameterType="java.lang.String">
+		SELECT count(*) FROM company
+		<where>
+			<if test=" company_full_name !=null and company_full_name !='' ">
+				and company_full_name = #{company_full_name}
+			</if>
+			<if test=" company_id !=null and company_id !='' ">
+				and company_id = #{company_id}
+			</if>
+			<if test=" city_code !=null and city_code !='' ">
+				and city_code = #{city_code}
+			</if>
+		</where>
+	</select>
+
 </mapper>

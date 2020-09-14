@@ -54,6 +54,24 @@
 		LIMIT #{star_num},#{pageSize}
 	</select>
 
-
+	<select id="selectCountByFactor" resultType="java.lang.Integer" parameterType="java.lang.String">
+		SELECT count(*) FROM user_company c
+		LEFT JOIN user u ON c.user_id = u.user_id
+		LEFT JOIN user_type ut ON ut.user_type_id = u.user_type_id
+		<where>
+			<if test=" company_id !=null and company_id !='' ">
+				and c.company_id = #{company_id}
+			</if>
+			<if test=" name !=null and name !='' ">
+				and u.name = #{name}
+			</if>
+			<if test=" user_name !=null and user_name !='' ">
+				and u.user_name = #{user_name}
+			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				and u.user_type_id = #{user_type_id}
+			</if>
+		</where>
+	</select>
 
 </mapper>

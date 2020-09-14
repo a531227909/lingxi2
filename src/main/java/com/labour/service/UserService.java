@@ -1,6 +1,7 @@
 package com.labour.service;
 
 import com.labour.entity.Result;
+import com.labour.model.PagesResult;
 
 public interface UserService {
 
@@ -12,5 +13,5 @@ public interface UserService {
 
     public Result updateStatus(String user_name, String status);
 
-    public Result selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page);
+    public PagesResult selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page);
 }

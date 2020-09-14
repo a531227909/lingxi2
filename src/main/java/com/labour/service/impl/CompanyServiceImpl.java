@@ -1,10 +1,11 @@
 package com.labour.service.impl;
 
 import com.labour.dao.CompanyDao;
+import com.labour.entity.Company;
 import com.labour.entity.Result;
 import com.labour.entity.UpLoadImg;
+import com.labour.model.PagesResult;
 import com.labour.service.CompanyService;
-import com.labour.utils.Md5Utils;
 import com.labour.utils.UploadFileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -62,6 +63,46 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
             result.setMsg("系统故障，添加公司失败");
         }
         return result;
+    }
+
+    @Override
+    public PagesResult selectCompanyByFactor(String company_full_name, String company_id, String city_code, String page) {
+        PagesResult pagesResult = new PagesResult();
+        int star_num = (Integer.parseInt(page)-1)*10;
+        int pageSize = 10;
+        int count = companyDao.selectCountByFactor(company_full_name, company_id, city_code);
+        List<Company> companies = companyDao.selectCompanyByFactor(company_full_name, company_id, city_code, star_num, pageSize);
+        String pages = String.valueOf(count/pageSize + 1);
+        if(companies.size()!=0){
+            for (Company company : companies){
+                String sblUrl = "";
+                String slUrl = "";
+                String spUrl = "";
+                String[] sblImgNames = company.getCompany_business_license().split(",");
+                String[] slImgNames = company.getCompany_logo().split(",");
+                String[] spImgNames = company.getCompany_pic().split(",");
+                for(String name : sblImgNames){
+                    sblUrl = sblUrl + upLoadImg.getUrl() + "/" + name + ",";
+                }
+                for(String name : slImgNames){
+                    slUrl = slUrl + upLoadImg.getUrl() + "/" + name + ",";
+                }
+                for(String name : spImgNames){
+                    spUrl = spUrl + upLoadImg.getUrl() + "/" + name + ",";
+                }
+                sblUrl = sblUrl.substring(0,sblUrl.length()-1);
+                slUrl = slUrl.substring(0,slUrl.length()-1);
+                spUrl = spUrl.substring(0,spUrl.length()-1);
+                company.setCompany_business_license(sblUrl);
+                company.setCompany_logo(slUrl);
+                company.setCompany_pic(spUrl);
+            }
+        }
+        pagesResult.setCode("1000");
+        pagesResult.setMsg("查询成功");
+        pagesResult.setPages(pages);
+        pagesResult.setData(companies);
+        return pagesResult;
     }
 
 }

@@ -6,6 +6,7 @@ import com.labour.entity.Company;
 import com.labour.entity.Result;
 import com.labour.entity.User;
 import com.labour.entity.UserType;
+import com.labour.model.PagesResult;
 import com.labour.service.UserService;
 import com.labour.utils.Md5Utils;
 import org.apache.logging.log4j.LogManager;
@@ -115,15 +116,18 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
     }
 
     @Override
-    public Result selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page) {
-        Result result = new Result();
+    public PagesResult selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page) {
+        PagesResult pagesResult = new PagesResult();
         int star_num = (Integer.parseInt(page)-1)*10;
         int pageSize = 10;
+        int count = userDao.selectCountByFactor(company_id, name, user_name, user_type_id);
         List<User> users = userDao.selectUserByFactor(company_id, name, user_name, user_type_id, star_num, pageSize);
-        result.setCode("1000");
-        result.setMsg("查询成功");
-        result.setData(users);
-        return result;
+        String pages = String.valueOf(count/pageSize + 1);
+        pagesResult.setCode("1000");
+        pagesResult.setMsg("查询成功");
+        pagesResult.setPages(pages);
+        pagesResult.setData(users);
+        return pagesResult;
     }
 
 }

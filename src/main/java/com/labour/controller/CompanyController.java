@@ -2,6 +2,7 @@ package com.labour.controller;
 
 import com.labour.entity.Result;
 import com.labour.entity.UpLoadImg;
+import com.labour.model.PagesResult;
 import com.labour.service.CompanyService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
 import java.util.List;
 
 @EnableConfigurationProperties(UpLoadImg.class)
@@ -71,6 +71,19 @@ public class CompanyController {
                 contact_position, province_code, province_name, city_code, city_name, county_code,
                 county_name, address, company_profile, company_business_license, company_logo, company_pic);
         return result;
+    }
+
+    @RequestMapping(value="/selectCompanyByFactor")
+    @ResponseBody
+    public PagesResult selectCompanyByFactor(String company_full_name, String company_id, String city_code, String page){
+        PagesResult pagesResult = new PagesResult();
+        if(StringUtils.isBlank(page)){
+            pagesResult.setCode("1001");
+            pagesResult.setMsg("页码不能为空");
+            return pagesResult;
+        }
+        pagesResult = companyService.selectCompanyByFactor(company_full_name, company_id, city_code, page);
+        return pagesResult;
     }
 
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.labour.dao.UserCompanyDao">
+
+	<select id="selectEntryApproval" resultType="com.labour.model.Approval">
+		SELECT uc.user_company_id,uc.user_id,uc.user_name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,uc.entry_approval_level,uc.resignation_approval_level,uc.advance_approval_level from user_company uc
+		LEFT JOIN `user` u on uc.user_id = u.user_id
+		LEFT JOIN `user_type` ut on u.user_type_id = ut.user_type_id
+		WHERE uc.company_id = #{company_id} and uc.entry_approval_level !='0'
+		ORDER BY uc.entry_approval_level ASC
+		LIMIT #{star_num},#{pageSize}
+	</select>
+
+	<select id="selectRaApproval" resultType="com.labour.model.Approval">
+		SELECT uc.user_company_id,uc.user_id,uc.user_name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,uc.entry_approval_level,uc.resignation_approval_level,uc.advance_approval_level from user_company uc
+		LEFT JOIN `user` u on uc.user_id = u.user_id
+		LEFT JOIN `user_type` ut on u.user_type_id = ut.user_type_id
+		WHERE uc.company_id = #{company_id} and uc.resignation_approval_level !='0'
+		ORDER BY uc.resignation_approval_level ASC
+		LIMIT #{star_num},#{pageSize}
+	</select>
+
+	<select id="selectAdvanceApproval" resultType="com.labour.model.Approval">
+		SELECT uc.user_company_id,uc.user_id,uc.user_name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,uc.entry_approval_level,uc.resignation_approval_level,uc.advance_approval_level from user_company uc
+		LEFT JOIN `user` u on uc.user_id = u.user_id
+		LEFT JOIN `user_type` ut on u.user_type_id = ut.user_type_id
+		WHERE uc.company_id = #{company_id} and uc.advance_approval_level !='0'
+		ORDER BY uc.advance_approval_level ASC
+		LIMIT #{star_num},#{pageSize}
+	</select>
+
+</mapper>

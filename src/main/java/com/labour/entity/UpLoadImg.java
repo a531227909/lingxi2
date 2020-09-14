@@ -19,6 +19,8 @@ public class UpLoadImg implements Serializable {
 
     private String path;
 
+    private String url;
+
     public String getPath() {
         return path;
     }
@@ -26,4 +28,21 @@ public class UpLoadImg implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "UpLoadImg{" +
+                "path='" + path + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
 }
