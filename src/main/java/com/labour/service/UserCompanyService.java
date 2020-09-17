@@ -9,10 +9,5 @@ import java.util.List;
 
 public interface UserCompanyService {
 
-    Result selectEntryApproval(String company_id, String page);
-
-    Result selectRaApproval(String company_id, String page);
-
-    Result selectAdvanceApproval(String company_id, String page);
 
 }

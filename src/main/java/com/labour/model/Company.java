@@ -1,6 +1,9 @@
-package com.labour.entity;
+package com.labour.model;
+
+import com.labour.entity.PictureName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Company implements Serializable {
 
@@ -69,15 +72,15 @@ public class Company implements Serializable {
     /**
      * 营业执照(图片)
      */
-    private Object company_business_license;
+    private List<PictureName> company_business_license;
     /**
      * 公司logo(图片)
      */
-    private Object company_logo;
+    private List<PictureName> company_logo;
     /**
-     * 营业照片(图片)
+     * 营业照片
      */
-    private Object company_pic;
+    private List<PictureName> company_pic;
     /**
      * 创建时间
      */
@@ -207,27 +210,27 @@ public class Company implements Serializable {
         this.company_profile = company_profile;
     }
 
-    public Object getCompany_business_license() {
+    public List<PictureName> getCompany_business_license() {
         return company_business_license;
     }
 
-    public void setCompany_business_license(Object company_business_license) {
+    public void setCompany_business_license(List<PictureName> company_business_license) {
         this.company_business_license = company_business_license;
     }
 
-    public Object getCompany_logo() {
+    public List<PictureName> getCompany_logo() {
         return company_logo;
     }
 
-    public void setCompany_logo(Object company_logo) {
+    public void setCompany_logo(List<PictureName> company_logo) {
         this.company_logo = company_logo;
     }
 
-    public Object getCompany_pic() {
+    public List<PictureName> getCompany_pic() {
         return company_pic;
     }
 
-    public void setCompany_pic(Object company_pic) {
+    public void setCompany_pic(List<PictureName> company_pic) {
         this.company_pic = company_pic;
     }
 
@@ -265,9 +268,9 @@ public class Company implements Serializable {
                 ", county_name='" + county_name + '\'' +
                 ", address='" + address + '\'' +
                 ", company_profile='" + company_profile + '\'' +
-                ", company_business_license='" + company_business_license + '\'' +
-                ", company_logo='" + company_logo + '\'' +
-                ", company_pic='" + company_pic + '\'' +
+                ", company_business_license=" + company_business_license +
+                ", company_logo=" + company_logo +
+                ", company_pic=" + company_pic +
                 ", create_time='" + create_time + '\'' +
                 ", update_time='" + update_time + '\'' +
                 '}';

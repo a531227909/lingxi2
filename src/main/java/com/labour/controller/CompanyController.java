@@ -4,6 +4,7 @@ import com.labour.entity.Result;
 import com.labour.entity.UpLoadImg;
 import com.labour.model.PagesResult;
 import com.labour.service.CompanyService;
+import com.labour.utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @EnableConfigurationProperties(UpLoadImg.class)
@@ -24,13 +24,21 @@ public class CompanyController {
 
     @RequestMapping(value="/insertOneCompany")
     @ResponseBody
-    public Result insertOneCompany(HttpServletRequest request, String company_full_name, String company_name, String company_size, String contact, String contact_phone,
+    public Result insertOneCompany(String company_full_name, String company_name, String company_size, String contact, String contact_phone,
                                 String contact_position, String province_code, String province_name, String city_code, String city_name, String county_code,
                                 String county_name, String address, String company_profile, List<MultipartFile> company_business_license, List<MultipartFile> company_logo, List<MultipartFile> company_pic){
         Result result = new Result();
         if(StringUtils.isBlank(company_full_name)){
             result.setCode("1001");
             result.setMsg("公司全称不能为空");
+            return result;
+        }else if(StrUtils.length(company_full_name) > 16){
+            result.setCode("1001");
+            result.setMsg("公司全称长度不能超过varchar(32)");
+            return result;
+        }else if(StrUtils.length(company_name) > 16){
+            result.setCode("1001");
+            result.setMsg("公司简称长度不能超过varchar(32)");
             return result;
         }else if(StringUtils.isBlank(contact)){
             result.setCode("1001");
@@ -67,7 +75,7 @@ public class CompanyController {
             }
         }
 
-        result = companyService.insertOneCompany(request,company_full_name, company_name, company_size, contact, contact_phone,
+        result = companyService.insertOneCompany(company_full_name, company_name, company_size, contact, contact_phone,
                 contact_position, province_code, province_name, city_code, city_name, county_code,
                 county_name, address, company_profile, company_business_license, company_logo, company_pic);
         return result;
@@ -86,4 +94,50 @@ public class CompanyController {
         return pagesResult;
     }
 
+    @RequestMapping(value="/updateOneCompany")
+    @ResponseBody
+    public Result updateOneCompany(String company_id, String company_full_name, String company_name, String company_size, String contact, String contact_phone,
+                                   String contact_position, String province_code, String province_name, String city_code, String city_name, String county_code,
+                                   String county_name, String address, String company_profile, List<MultipartFile> company_business_license, List<MultipartFile> company_logo, List<MultipartFile> company_pic){
+        Result result = new Result();
+        if(StringUtils.isBlank(company_id)){
+            result.setCode("1001");
+            result.setMsg("公司ID不能为空");
+            return result;
+        }
+        result = companyService.updateOneCompany(company_id, company_full_name, company_name, company_size, contact, contact_phone,
+                contact_position, province_code, province_name, city_code, city_name, county_code,
+                county_name, address, company_profile, company_business_license, company_logo, company_pic);
+        return result;
+    }
+
+    @RequestMapping(value="/selectOneCompany")
+    @ResponseBody
+    public Result selectOneCompany(String company_id){
+        Result result = new Result();
+        if(StringUtils.isBlank(company_id)){
+            result.setCode("1001");
+            result.setMsg("公司ID不能为空");
+            return result;
+        }
+        result = companyService.selectOneCompany(company_id);
+        return result;
+    }
+
+    @RequestMapping(value="/deleteCompanyPic")
+    @ResponseBody
+    public Result deleteCompanyPic(String pictureId, String pictureName){
+        Result result = new Result();
+        if(StringUtils.isBlank(pictureId)){
+            result.setCode("1001");
+            result.setMsg("图片ID不能为空");
+            return result;
+        }else if(StringUtils.isBlank(pictureName)){
+            result.setCode("1001");
+            result.setMsg("图片名不能为空");
+            return result;
+        }
+        result = companyService.deleteCompanyPic(pictureId, pictureName);
+        return result;
+    }
 }

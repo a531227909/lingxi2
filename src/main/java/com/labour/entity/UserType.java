@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class UserType implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 用户自增ID
      */

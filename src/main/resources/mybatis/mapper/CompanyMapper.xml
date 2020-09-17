@@ -3,7 +3,8 @@
 <mapper namespace="com.labour.dao.CompanyDao">
 
 	<select id="selectOneCompany" resultType="com.labour.entity.Company" parameterType="java.lang.String">
-		select company_id, company_full_name FROM company
+		select company_id, company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name,
+		county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, create_time, update_time FROM company
 		where company_id=#{company_id};
 	</select>
 
@@ -43,5 +44,63 @@
 			</if>
 		</where>
 	</select>
+
+	<update id="updateOneCompany" parameterType="java.lang.String">
+		UPDATE company
+		<trim prefix="set" suffixOverrides=",">
+			<if test=" company_full_name !=null and company_full_name !='' ">
+				company_full_name = #{company_full_name},
+			</if>
+			<if test=" company_name !=null and company_name !='' ">
+				company_name = #{company_name},
+			</if>
+			<if test=" company_size !=null and company_size !='' ">
+				company_size = #{company_size},
+			</if>
+			<if test=" contact !=null and contact !='' ">
+				contact = #{contact},
+			</if>
+			<if test=" contact_phone !=null and contact_phone !='' ">
+				contact_phone = #{contact_phone},
+			</if>
+			<if test=" contact_position !=null and contact_position !='' ">
+				contact_position = #{contact_position},
+			</if>
+			<if test=" province_code !=null and province_code !='' ">
+				province_code = #{province_code},
+			</if>
+			<if test=" province_name !=null and province_name !='' ">
+				province_name = #{province_name},
+			</if>
+			<if test=" city_code !=null and city_code !='' ">
+				city_code = #{city_code},
+			</if>
+			<if test=" city_name !=null and city_name !='' ">
+				city_name = #{city_name},
+			</if>
+			<if test=" county_code !=null and county_code !='' ">
+				county_code = #{county_code},
+			</if>
+			<if test=" county_name !=null and county_name !='' ">
+				county_name = #{county_name},
+			</if>
+			<if test=" address !=null and address !='' ">
+				address = #{address},
+			</if>
+			<if test=" company_profile !=null and company_profile !='' ">
+				company_profile = #{company_profile},
+			</if>
+			<if test=" company_business_license !=null and company_business_license !='' ">
+				company_business_license = #{company_business_license},
+			</if>
+			<if test=" company_logo !=null and company_logo !='' ">
+				company_logo = #{company_logo},
+			</if>
+			<if test=" company_pic !=null and company_pic !='' ">
+				company_pic = #{company_pic},
+			</if>
+		</trim>
+		WHERE company_id = #{company_id}
+	</update>
 
 </mapper>

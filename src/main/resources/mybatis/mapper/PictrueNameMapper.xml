@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.labour.dao.PictureNameDao">
+
+	<select id="selectPicNameById" resultType="com.labour.entity.PictureName" parameterType="java.lang.String">
+		select pictureID, pictureName FROM picture_name
+		WHERE pictureID=#{pictureID};
+	</select>
+
+	<insert id="insertOnepictureName" parameterType="java.lang.String">
+		INSERT INTO picture_name (pictureID, pictureName)
+		VALUES (#{pictureID}, #{pictureName});
+	</insert>
+
+	<delete id="deleteCompanyPic" parameterType="java.lang.String">
+		DELETE FROM picture_name where pictureID = #{pictureID} and pictureName = #{pictureName}
+	</delete>
+
+</mapper>

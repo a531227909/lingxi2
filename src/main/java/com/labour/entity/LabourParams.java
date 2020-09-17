@@ -2,6 +2,8 @@ package com.labour.entity;
 
 public class LabourParams {
 
+    private static final long serialVersionUID = 1L;
+
     //业务参数
     public String merchantNo;//商户号
     public String key;//请求秘钥

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Approval implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 用户公司自增ID
      */
@@ -16,6 +18,10 @@ public class Approval implements Serializable {
      * 用户名
      */
     private String user_name;
+    /**
+     * 用户名
+     */
+    private String name;
     /**
      * 用户类型(岗位)ID
      */
@@ -33,17 +39,21 @@ public class Approval implements Serializable {
      */
     private String company_full_name;
     /**
-     * 入职审批流程序列
+     * 入职审核权限自增ID
      */
-    private String entry_approval_level;
+    private String entryApprovalId;
     /**
-     * 预支审批流程序列
+     * 离职审核权限自增ID
      */
-    private String resignation_approval_level;
+    private String resignationApprovalId;
     /**
-     * 离职审批流程序列
+     * 预支审核权限自增ID
      */
-    private String advance_approval_level;
+    private String payAdvanceApprovalId;
+    /**
+     * 上级审核权限ID 0:没有权限 -1:顶级
+     */
+    private String parentId;
 
     public String getUser_company_id() {
         return user_company_id;
@@ -67,6 +77,14 @@ public class Approval implements Serializable {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUser_type_id() {
@@ -101,28 +119,36 @@ public class Approval implements Serializable {
         this.company_full_name = company_full_name;
     }
 
-    public String getEntry_approval_level() {
-        return entry_approval_level;
+    public String getEntryApprovalId() {
+        return entryApprovalId;
     }
 
-    public void setEntry_approval_level(String entry_approval_level) {
-        this.entry_approval_level = entry_approval_level;
+    public void setEntryApprovalId(String entryApprovalId) {
+        this.entryApprovalId = entryApprovalId;
     }
 
-    public String getResignation_approval_level() {
-        return resignation_approval_level;
+    public String getResignationApprovalId() {
+        return resignationApprovalId;
     }
 
-    public void setResignation_approval_level(String resignation_approval_level) {
-        this.resignation_approval_level = resignation_approval_level;
+    public void setResignationApprovalId(String resignationApprovalId) {
+        this.resignationApprovalId = resignationApprovalId;
     }
 
-    public String getAdvance_approval_level() {
-        return advance_approval_level;
+    public String getPayAdvanceApprovalId() {
+        return payAdvanceApprovalId;
     }
 
-    public void setAdvance_approval_level(String advance_approval_level) {
-        this.advance_approval_level = advance_approval_level;
+    public void setPayAdvanceApprovalId(String payAdvanceApprovalId) {
+        this.payAdvanceApprovalId = payAdvanceApprovalId;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     @Override
@@ -131,13 +157,15 @@ public class Approval implements Serializable {
                 "user_company_id='" + user_company_id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", user_name='" + user_name + '\'' +
+                ", name='" + name + '\'' +
                 ", user_type_id='" + user_type_id + '\'' +
                 ", user_type_name='" + user_type_name + '\'' +
                 ", company_id='" + company_id + '\'' +
                 ", company_full_name='" + company_full_name + '\'' +
-                ", entry_approval_level='" + entry_approval_level + '\'' +
-                ", resignation_approval_level='" + resignation_approval_level + '\'' +
-                ", advance_approval_level='" + advance_approval_level + '\'' +
+                ", entryApprovalId='" + entryApprovalId + '\'' +
+                ", resignationApprovalId='" + resignationApprovalId + '\'' +
+                ", payAdvanceApprovalId='" + payAdvanceApprovalId + '\'' +
+                ", parentId='" + parentId + '\'' +
                 '}';
     }
 }

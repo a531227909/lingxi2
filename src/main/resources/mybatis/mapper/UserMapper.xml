@@ -34,8 +34,8 @@
 	</update>
 
 	<select id="selectUserByFactor" resultType="com.labour.entity.User" parameterType="java.lang.String">
-		SELECT u.user_id,u.user_name,u.name,u.user_type_id,ut.user_type_name,ut.user_type_name,u.create_user_id,u.create_user_name,u.create_time,u.status,u.update_time,c.user_company_id,c.company_id,c.company_full_name FROM user_company c
-		LEFT JOIN user u ON c.user_id = u.user_id
+		SELECT u.user_id,u.user_name,u.name,u.user_type_id,ut.user_type_name,ut.user_type_name,u.create_user_id,u.create_user_name,u.create_time,u.status,u.update_time,c.user_company_id,c.company_id,c.company_full_name FROM user u
+		LEFT JOIN user_company c ON c.user_id = u.user_id
 		LEFT JOIN user_type ut ON ut.user_type_id = u.user_type_id
 		<where>
 			<if test=" company_id !=null and company_id !='' ">
@@ -55,8 +55,8 @@
 	</select>
 
 	<select id="selectCountByFactor" resultType="java.lang.Integer" parameterType="java.lang.String">
-		SELECT count(*) FROM user_company c
-		LEFT JOIN user u ON c.user_id = u.user_id
+		SELECT count(*) FROM user u
+		LEFT JOIN user_company c ON c.user_id = u.user_id
 		LEFT JOIN user_type ut ON ut.user_type_id = u.user_type_id
 		<where>
 			<if test=" company_id !=null and company_id !='' ">

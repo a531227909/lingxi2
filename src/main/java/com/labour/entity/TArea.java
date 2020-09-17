@@ -3,6 +3,9 @@ package com.labour.entity;
 import java.io.Serializable;
 
 public class TArea implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 地区ID
      */
