@@ -5,8 +5,8 @@ import com.labour.dao.UserDao;
 import com.labour.entity.Company;
 import com.labour.entity.Result;
 import com.labour.entity.User;
-import com.labour.entity.UserType;
 import com.labour.model.PagesResult;
+import com.labour.model.UserType;
 import com.labour.service.UserService;
 import com.labour.utils.Md5Utils;
 import org.apache.logging.log4j.LogManager;
@@ -67,8 +67,7 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
     @Override
     public Result selectAllUserType() {
         Result result = new Result();
-        List<UserType> userTypes = new ArrayList<>();
-        userTypes = userDao.selectAllUserType();
+        List<UserType> userTypes = userDao.selectAllUserType();
         result.setCode("1000");
         result.setMsg("查询成功");
         result.setData(userTypes);
@@ -127,7 +126,18 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
         pagesResult.setMsg("查询成功");
         pagesResult.setPages(pages);
         pagesResult.setData(users);
+        pagesResult.setCount(String.valueOf(count));
         return pagesResult;
+    }
+
+    @Override
+    public Result selectUsersCount(String status, String company_id) {
+        Result result = new Result();
+        List<UserType> userTypes = userDao.selectUsersCount(status, company_id);
+        result.setCode("1000");
+        result.setMsg("查询成功");
+        result.setData(userTypes);
+        return result;
     }
 
 }

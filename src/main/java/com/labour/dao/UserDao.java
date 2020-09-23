@@ -1,9 +1,7 @@
 package com.labour.dao;
 
-import com.labour.entity.Company;
-import com.labour.entity.Result;
 import com.labour.entity.User;
-import com.labour.entity.UserType;
+import com.labour.model.UserType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,4 +30,6 @@ public interface UserDao {
 
     int selectCountByFactor(@Param("company_id") String company_id,@Param("name") String name,@Param("user_name") String user_name,
                                @Param("user_type_id") String user_type_id);
+
+    List<UserType> selectUsersCount(@Param("status") String status, String company_id);
 }

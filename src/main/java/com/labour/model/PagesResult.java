@@ -8,8 +8,9 @@ public class PagesResult implements Serializable {
 
     private String code;
     private String msg;
-    private String pages;
     private Object data;
+    private String pages;
+    private String count;
 
     /**
      * @return the code
@@ -52,6 +53,14 @@ public class PagesResult implements Serializable {
         this.data = data;
     }
 
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return "PagesResult{" +
@@ -59,7 +68,7 @@ public class PagesResult implements Serializable {
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
                 ", pages='" + pages + '\'' +
+                ", count='" + count + '\'' +
                 '}';
     }
-
 }

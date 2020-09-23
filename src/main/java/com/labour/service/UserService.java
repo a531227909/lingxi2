@@ -14,4 +14,6 @@ public interface UserService {
     public Result updateStatus(String user_name, String status);
 
     public PagesResult selectUserByFactor(String company_id, String name, String user_name, String user_type_id, String page);
+
+    public Result selectUsersCount(String status, String company_id);
 }

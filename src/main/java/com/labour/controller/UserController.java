@@ -140,4 +140,21 @@ public class UserController {
         return pagesResult;
     }
 
+    @RequestMapping(value="/selectUsersCount")
+    @ResponseBody
+    public Result selectUsersCount(String status, String company_id){
+        Result result = new Result();
+        if(StringUtils.isBlank(status)){
+            result.setCode("1001");
+            result.setMsg("身份ID不能为空");
+            return result;
+        }else if(StringUtils.isBlank(company_id)){
+            result.setCode("1001");
+            result.setMsg("公司ID不能为空");
+            return result;
+        }
+        result = userService.selectUsersCount(status, company_id);
+        return result;
+    }
+
 }

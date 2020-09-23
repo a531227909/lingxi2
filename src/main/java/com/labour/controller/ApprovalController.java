@@ -17,52 +17,64 @@ public class ApprovalController {
 
     @RequestMapping(value="/selectOneEntryApproval")
     @ResponseBody
-    public Result selectOneEntryApproval(String company_id, String user_id){
+    public Result selectOneEntryApproval(String company_id, String user_id, String user_type_id){
         Result result = new Result();
-        if(StringUtils.isBlank(company_id)){
+        if(StringUtils.isBlank(user_id)&&StringUtils.isBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时为空");
+            return result;
+        }else if(StringUtils.isNotBlank(user_id)&&StringUtils.isNotBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时存在");
+            return result;
+        }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
             result.setMsg("公司ID不能为空");
             return result;
-        }else if(StringUtils.isBlank(user_id)){
-            result.setCode("1001");
-            result.setMsg("用户ID不能为空");
-            return result;
         }
-        result = approvalService.selectOneEntryApproval(company_id, user_id);
+        result = approvalService.selectOneEntryApproval(company_id, user_id, user_type_id);
         return result;
     }
 
     @RequestMapping(value="/selectOneRaApproval")
     @ResponseBody
-    public Result selectOneRaApproval(String company_id, String user_id){
+    public Result selectOneRaApproval(String company_id, String user_id, String user_type_id){
         Result result = new Result();
-        if(StringUtils.isBlank(company_id)){
+        if(StringUtils.isBlank(user_id)&&StringUtils.isBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时为空");
+            return result;
+        }else if(StringUtils.isNotBlank(user_id)&&StringUtils.isNotBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时存在");
+            return result;
+        }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
             result.setMsg("公司ID不能为空");
             return result;
-        }else if(StringUtils.isBlank(user_id)){
-            result.setCode("1001");
-            result.setMsg("用户ID不能为空");
-            return result;
         }
-        result = approvalService.selectOneRaApproval(company_id, user_id);
+        result = approvalService.selectOneRaApproval(company_id, user_id, user_type_id);
         return result;
     }
 
     @RequestMapping(value="/selectOnePaApproval")
     @ResponseBody
-    public Result selectOnePaApproval(String company_id, String user_id){
+    public Result selectOnePaApproval(String company_id, String user_id, String user_type_id){
         Result result = new Result();
-        if(StringUtils.isBlank(company_id)){
+        if(StringUtils.isBlank(user_id)&&StringUtils.isBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时为空");
+            return result;
+        }else if(StringUtils.isNotBlank(user_id)&&StringUtils.isNotBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时存在");
+            return result;
+        }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
             result.setMsg("公司ID不能为空");
             return result;
-        }else if(StringUtils.isBlank(user_id)){
-            result.setCode("1001");
-            result.setMsg("用户ID不能为空");
-            return result;
         }
-        result = approvalService.selectOnePaApproval(company_id, user_id);
+        result = approvalService.selectOnePaApproval(company_id, user_id, user_type_id);
         return result;
     }
 
@@ -107,11 +119,19 @@ public class ApprovalController {
 
     @RequestMapping(value="/insertOneEnApproval")
     @ResponseBody
-    public Result insertOneEnApproval(String company_id, String parentId, String user_id){
+    public Result insertOneEnApproval(String company_id, String parentId, String user_id, String user_type_id, String type){
         Result result = new Result();
-        if(StringUtils.isBlank(user_id)){
+        if(StringUtils.isBlank(user_id)&&StringUtils.isBlank(user_type_id)){
             result.setCode("1001");
-            result.setMsg("用户ID不能为空");
+            result.setMsg("用户ID,部门ID不能同时为空");
+            return result;
+        }else if(StringUtils.isNotBlank(user_id)&&StringUtils.isNotBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时存在");
+            return result;
+        }else if(StringUtils.isBlank(type)){
+            result.setCode("1001");
+            result.setMsg("审核类型ID不能为空(1:管理员 2:部门)");
             return result;
         }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
@@ -122,17 +142,25 @@ public class ApprovalController {
             result.setMsg("上级审核权限ID不能为空");
             return result;
         }
-        result = approvalService.insertOneEnApproval(company_id, parentId, user_id);
+        result = approvalService.insertOneEnApproval(company_id, parentId, user_id, user_type_id, type);
         return result;
     }
 
     @RequestMapping(value="/insertOneRaApproval")
     @ResponseBody
-    public Result insertOneRaApproval(String company_id, String parentId, String user_id){
+    public Result insertOneRaApproval(String company_id, String parentId, String user_id, String user_type_id, String type){
         Result result = new Result();
-        if(StringUtils.isBlank(user_id)){
+        if(StringUtils.isBlank(user_id)&&StringUtils.isBlank(user_type_id)){
             result.setCode("1001");
-            result.setMsg("用户ID不能为空");
+            result.setMsg("用户ID,部门ID不能同时为空");
+            return result;
+        }else if(StringUtils.isNotBlank(user_id)&&StringUtils.isNotBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时存在");
+            return result;
+        }else if(StringUtils.isBlank(type)){
+            result.setCode("1001");
+            result.setMsg("审核类型ID不能为空(1:管理员 2:部门)");
             return result;
         }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
@@ -143,17 +171,25 @@ public class ApprovalController {
             result.setMsg("上级审核权限ID不能为空");
             return result;
         }
-        result = approvalService.insertOneRaApproval(company_id, parentId, user_id);
+        result = approvalService.insertOneRaApproval(company_id, parentId, user_id, user_type_id, type);
         return result;
     }
 
     @RequestMapping(value="/insertOnePaApproval")
     @ResponseBody
-    public Result insertOnePaApproval(String company_id, String parentId, String user_id){
+    public Result insertOnePaApproval(String company_id, String parentId, String user_id, String user_type_id, String type){
         Result result = new Result();
-        if(StringUtils.isBlank(user_id)){
+        if(StringUtils.isBlank(user_id)&&StringUtils.isBlank(user_type_id)){
             result.setCode("1001");
-            result.setMsg("用户ID不能为空");
+            result.setMsg("用户ID,部门ID不能同时为空");
+            return result;
+        }else if(StringUtils.isNotBlank(user_id)&&StringUtils.isNotBlank(user_type_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID,部门ID不能同时存在");
+            return result;
+        }else if(StringUtils.isBlank(type)){
+            result.setCode("1001");
+            result.setMsg("审核类型ID不能为空(1:管理员 2:部门)");
             return result;
         }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
@@ -164,7 +200,7 @@ public class ApprovalController {
             result.setMsg("上级审核权限ID不能为空");
             return result;
         }
-        result = approvalService.insertOnePaApproval(company_id, parentId, user_id);
+        result = approvalService.insertOnePaApproval(company_id, parentId, user_id, user_type_id, type);
         return result;
     }
 

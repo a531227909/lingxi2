@@ -55,6 +55,11 @@ public class Approval implements Serializable {
      */
     private String parentId;
 
+    /**
+     * 1:管理员 2:部门
+     */
+    private String type;
+
     public String getUser_company_id() {
         return user_company_id;
     }
@@ -151,6 +156,14 @@ public class Approval implements Serializable {
         this.parentId = parentId;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Approval{" +
@@ -166,6 +179,7 @@ public class Approval implements Serializable {
                 ", resignationApprovalId='" + resignationApprovalId + '\'' +
                 ", payAdvanceApprovalId='" + payAdvanceApprovalId + '\'' +
                 ", parentId='" + parentId + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

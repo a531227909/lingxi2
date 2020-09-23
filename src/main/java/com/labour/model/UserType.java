@@ -1,4 +1,4 @@
-package com.labour.entity;
+package com.labour.model;
 
 import java.io.Serializable;
 
@@ -15,9 +15,13 @@ public class UserType implements Serializable {
      */
     private String user_type_name;
     /**
-     * 状态 1:管理员 2:用户
+     * 状态 身份ID 0:超级管理员 1:用户 2:管理员
      */
     private String status;
+    /**
+     * 总数
+     */
+    private String total;
 
     public String getUser_type_id() {
         return user_type_id;
@@ -43,12 +47,21 @@ public class UserType implements Serializable {
         this.status = status;
     }
 
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "UserType{" +
                 "user_type_id='" + user_type_id + '\'' +
                 ", user_type_name='" + user_type_name + '\'' +
                 ", status='" + status + '\'' +
+                ", total='" + total + '\'' +
                 '}';
     }
 }

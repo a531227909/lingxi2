@@ -117,6 +117,7 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
         pagesResult.setMsg("查询成功");
         pagesResult.setPages(pages);
         pagesResult.setData(companies);
+        pagesResult.setCount(String.valueOf(count));
         return pagesResult;
     }
 
@@ -135,12 +136,14 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
         List<String> clnames = uploadTools.uploadFiles(company_logo, path);
         //公司照片名称
         List<String> cpnames = uploadTools.uploadFiles(company_pic, path);
+
+        Company company = companyDao.selectOneCompany(company_id);
         //公司营业执照图片ID
-        String cblId = UUIDUtils.getUUID();
+        String cblId = company.getCompany_business_license().toString();
         //公司logo图片ID
-        String clId = UUIDUtils.getUUID();
+        String clId = company.getCompany_logo().toString();
         //公司照片图片ID
-        String cpId = UUIDUtils.getUUID();
+        String cpId = company.getCompany_pic().toString();
         if(cblnames!=null && cblnames.size()>=0){
             for(String pictureName : cblnames){
                 pictureNameDao.insertOnepictureName(cblId, pictureName);

@@ -3,13 +3,13 @@
 <mapper namespace="com.labour.dao.ApprovalDao">
 
 	<select id="selectOneEntryApproval" resultType="com.labour.model.Approval">
-		SELECT uc.user_company_id,uc.user_id,u.user_name,u.name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,ea.entryApprovalId,ea.parentId FROM entry_approval ea
+		SELECT uc.user_company_id,uc.user_id,u.user_name,u.name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,ea.entryApprovalId,ea.parentId,ea.type FROM entry_approval ea
 		LEFT JOIN user_company uc ON uc.user_id = ea.user_id
 		LEFT JOIN user u ON uc.user_id = u.user_id
-		LEFT JOIN user_type ut on u.user_type_id = ut.user_type_id
+		LEFT JOIN user_type ut ON u.user_type_id = ut.user_type_id OR ea.user_type_id = ut.user_type_id
 		<where>
 			<if test=" company_id !=null and company_id !='' ">
-				and uc.company_id = #{company_id}
+				and ea.company_id = #{company_id}
 			</if>
 			<if test=" parentId !=null and parentId !='' ">
 				and ea.parentId = #{parentId}
@@ -17,17 +17,23 @@
 			<if test=" user_id !=null and user_id !='' ">
 				AND ea.user_id = #{user_id}
 			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				AND ea.user_type_id = #{user_type_id}
+			</if>
+			<if test=" type !=null and type !='' ">
+				AND ea.type = #{type}
+			</if>
 		</where>
 	</select>
 
 	<select id="selectOneRaApproval" resultType="com.labour.model.Approval">
-		SELECT uc.user_company_id,uc.user_id,u.user_name,u.name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,ra.resignationApprovalId,ra.parentId FROM resignation_approval ra
+		SELECT uc.user_company_id,uc.user_id,u.user_name,u.name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,ra.resignationApprovalId,ra.parentId,ra.type FROM resignation_approval ra
 		LEFT JOIN user_company uc ON uc.user_id = ra.user_id
 		LEFT JOIN user u ON uc.user_id = u.user_id
-		LEFT JOIN user_type ut on u.user_type_id = ut.user_type_id
+		LEFT JOIN user_type ut on u.user_type_id = ut.user_type_id OR ra.user_type_id = ut.user_type_id
 		<where>
 			<if test=" company_id !=null and company_id !='' ">
-				and uc.company_id = #{company_id}
+				and ra.company_id = #{company_id}
 			</if>
 			<if test=" parentId !=null and parentId !='' ">
 				and ra.parentId = #{parentId}
@@ -35,17 +41,23 @@
 			<if test=" user_id !=null and user_id !='' ">
 				AND ra.user_id = #{user_id}
 			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				AND ra.user_type_id = #{user_type_id}
+			</if>
+			<if test=" type !=null and type !='' ">
+				AND ra.type = #{type}
+			</if>
 		</where>
 	</select>
 
 	<select id="selectOnePaApproval" resultType="com.labour.model.Approval">
-		SELECT uc.user_company_id,uc.user_id,u.user_name,u.name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,paa.payAdvanceApprovalId,paa.parentId FROM pay_advance_approval paa
+		SELECT uc.user_company_id,uc.user_id,u.user_name,u.name,ut.user_type_id,ut.user_type_name,uc.company_id,uc.company_full_name,paa.payAdvanceApprovalId,paa.parentId,paa.type FROM pay_advance_approval paa
 		LEFT JOIN user_company uc ON uc.user_id = paa.user_id
 		LEFT JOIN user u ON uc.user_id = u.user_id
-		LEFT JOIN user_type ut on u.user_type_id = ut.user_type_id
+		LEFT JOIN user_type ut on u.user_type_id = ut.user_type_id OR paa.user_type_id = ut.user_type_id
 		<where>
 			<if test=" company_id !=null and company_id !='' ">
-				and uc.company_id = #{company_id}
+				and paa.company_id = #{company_id}
 			</if>
 			<if test=" parentId !=null and parentId !='' ">
 				and paa.parentId = #{parentId}
@@ -53,22 +65,28 @@
 			<if test=" user_id !=null and user_id !='' ">
 				AND paa.user_id = #{user_id}
 			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				AND paa.user_type_id = #{user_type_id}
+			</if>
+			<if test=" type !=null and type !='' ">
+				AND paa.type = #{type}
+			</if>
 		</where>
 	</select>
 
 	<insert id="insertOneEnApproval" parameterType="java.lang.String">
-		INSERT INTO entry_approval (user_id, company_id, parentId)
-		VALUES (#{user_id}, #{company_id}, #{parentId})
+		INSERT INTO entry_approval (user_id, user_type_id, type, company_id, parentId)
+		VALUES (#{user_id}, #{user_type_id}, #{type}, #{company_id}, #{parentId})
 	</insert>
 
 	<insert id="insertOneRaApproval" parameterType="java.lang.String">
-		INSERT INTO resignation_approval (user_id, company_id, parentId)
-		VALUES (#{user_id}, #{company_id}, #{parentId})
+		INSERT INTO resignation_approval (user_id, user_type_id, type, company_id, parentId)
+		VALUES (#{user_id}, #{user_type_id}, #{type}, #{company_id}, #{parentId})
 	</insert>
 
 	<insert id="insertOnePaApproval" parameterType="java.lang.String">
-		INSERT INTO pay_advance_approval (user_id, company_id, parentId)
-		VALUES (#{user_id}, #{company_id}, #{parentId})
+		INSERT INTO pay_advance_approval (user_id, user_type_id, type, company_id, parentId)
+		VALUES (#{user_id}, #{user_type_id}, #{type}, #{company_id}, #{parentId})
 	</insert>
 	
 	<update id="updateOneEnApproval" parameterType="java.lang.String">
@@ -82,6 +100,12 @@
 			</if>
 			<if test=" user_id !=null and user_id !='' ">
 				user_id = #{user_id},
+			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				user_type_id = #{user_type_id},
+			</if>
+			<if test=" type !=null and type !='' ">
+				type = #{type},
 			</if>
 		</trim>
 		WHERE entryApprovalId = #{entryApprovalId}
@@ -99,6 +123,12 @@
 			<if test=" user_id !=null and user_id !='' ">
 				user_id = #{user_id},
 			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				user_type_id = #{user_type_id},
+			</if>
+			<if test=" type !=null and type !='' ">
+				type = #{type},
+			</if>
 		</trim>
 		WHERE resignationApprovalId = #{resignationApprovalId}
 	</update>
@@ -114,6 +144,12 @@
 			</if>
 			<if test=" user_id !=null and user_id !='' ">
 				user_id = #{user_id},
+			</if>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				user_type_id = #{user_type_id},
+			</if>
+			<if test=" type !=null and type !='' ">
+				type = #{type},
 			</if>
 		</trim>
 		WHERE payAdvanceApprovalId = #{payAdvanceApprovalId}

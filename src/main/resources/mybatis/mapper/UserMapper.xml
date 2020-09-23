@@ -17,7 +17,7 @@
 		where user_name=#{user_name};
 	</select>
 
-	<select id="selectAllUserType" resultType="com.labour.entity.UserType" parameterType="java.lang.String">
+	<select id="selectAllUserType" resultType="com.labour.model.UserType" parameterType="java.lang.String">
 		select user_type_id, user_type_name, status FROM user_type;
 	</select>
 
@@ -72,6 +72,15 @@
 				and u.user_type_id = #{user_type_id}
 			</if>
 		</where>
+	</select>
+
+	<select id="selectUsersCount" resultType="com.labour.model.UserType" parameterType="java.lang.String">
+		SELECT ut.user_type_id,count(ucc.user_type_id) AS total,ut.user_type_name,ut.status FROM user_type ut
+		LEFT JOIN (SELECT u.user_type_id,uc.company_id FROM user u
+		    LEFT JOIN user_company uc on u.user_id=uc.user_id
+			WHERE company_id = #{company_id}) ucc
+		ON ut.user_type_id = ucc.user_type_id
+		WHERE ut.status = #{status} GROUP BY ut.user_type_id ORDER BY ut.user_type_id;
 	</select>
 
 </mapper>
