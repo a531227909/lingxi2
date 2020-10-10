@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.labour.dao.LaborDemandDao">
+
+    <insert id="insertLaborDemand" parameterType="com.labour.model.LaborDemand">
+        INSERT INTO labor_demand (company_id, company_full_name, demandId, demandSource, demandSourceTypeId, demandSourceName, demandSourceId, usingCompanyId, usingCompanyName, stationName, salaryTypeId,
+                                  salaryTypeName, province_code, province_name, city_code, city_name, county_code, county_name, address, startWorkTime, endWorkTime,
+                                  resident, residentName, minAge, maxAge, genderName, genderId, shiftSystemName, shiftSystemId, operationModeName, operationModeId,
+                                  workClothesName, workClothesId, welfareMemberId, welfareMembers, features, jobRequirements, businessPriceId, businessPriceName,
+                                  signUnitPrice, businessFunds, workersPrice, status)
+        VALUES (#{company_id}, #{company_full_name}, #{demandId}, #{demandSource}, #{demandSourceTypeId}, #{demandSourceName}, #{demandSourceId}, #{usingCompanyId}, #{usingCompanyName}, #{stationName}, #{salaryTypeId},
+                #{salaryTypeName}, #{province_code}, #{province_name}, #{city_code}, #{city_name}, #{county_code}, #{county_name}, #{address}, #{startWorkTime}, #{endWorkTime},
+                #{resident}, #{residentName}, #{minAge}, #{maxAge}, #{genderName}, #{genderId}, #{shiftSystemName}, #{shiftSystemId}, #{operationModeName}, #{operationModeId},
+                #{workClothesName}, #{workClothesId}, #{welfareMemberId}, #{welfareMembers}, #{features}, #{jobRequirements}, #{businessPriceId}, #{businessPriceName},
+                #{signUnitPrice}, #{businessFunds}, #{workersPrice}, #{status});
+    </insert>
+
+    <update id="updateLaborDemand" parameterType="com.labour.model.LaborDemand">
+        UPDATE labor_demand
+        <trim prefix="set" suffixOverrides=",">
+            <if test=" demandSource !=null and demandSource !='' ">
+                demandSource = #{demandSource},
+            </if>
+            <if test=" demandSourceTypeId !=null and demandSourceTypeId !='' ">
+                demandSourceTypeId = #{demandSourceTypeId},
+            </if>
+            <if test=" demandSourceName !=null and demandSourceName !='' ">
+                demandSourceName = #{demandSourceName},
+            </if>
+            <if test=" demandSourceId !=null and demandSourceId !='' ">
+                demandSourceId = #{demandSourceId},
+            </if>
+            <if test=" usingCompanyId !=null and usingCompanyId !='' ">
+                usingCompanyId = #{usingCompanyId},
+            </if>
+            <if test=" usingCompanyName !=null and usingCompanyName !='' ">
+                usingCompanyName = #{usingCompanyName},
+            </if>
+            <if test=" stationName !=null and stationName !='' ">
+                stationName = #{stationName},
+            </if>
+            <if test=" salaryTypeId !=null and salaryTypeId !='' ">
+                salaryTypeId = #{salaryTypeId},
+            </if>
+            <if test=" salaryTypeName !=null and salaryTypeName !='' ">
+                salaryTypeName = #{salaryTypeName},
+            </if>
+            <if test=" province_code !=null and province_code !='' ">
+                province_code = #{province_code},
+            </if>
+            <if test=" province_name !=null and province_name !='' ">
+                province_name = #{province_name},
+            </if>
+            <if test=" city_code !=null and city_code !='' ">
+                city_code = #{city_code},
+            </if>
+            <if test=" city_name !=null and city_name !='' ">
+                city_name = #{city_name},
+            </if>
+            <if test=" county_code !=null and county_code !='' ">
+                county_code = #{county_code},
+            </if>
+            <if test=" county_name !=null and county_name !='' ">
+                county_name = #{county_name},
+            </if>
+            <if test=" address !=null and address !='' ">
+                address = #{address},
+            </if>
+            <if test=" startWorkTime !=null and startWorkTime !='' ">
+                startWorkTime = #{startWorkTime},
+            </if>
+            <if test=" endWorkTime !=null and endWorkTime !='' ">
+                endWorkTime = #{endWorkTime},
+            </if>
+            <if test=" resident !=null and resident !='' ">
+                resident = #{resident},
+            </if>
+            <if test=" residentName !=null and residentName !='' ">
+                residentName = #{residentName},
+            </if>
+            minAge = #{minAge},
+            maxAge = #{maxAge},
+            genderName = #{genderName},
+            genderId = #{genderId},
+            shiftSystemName = #{shiftSystemName},
+            shiftSystemId = #{shiftSystemId},
+            operationModeName = #{operationModeName},
+            operationModeId = #{operationModeId},
+            workClothesName = #{workClothesName},
+            workClothesId = #{workClothesId},
+            welfareMemberId = #{welfareMemberId},
+            welfareMembers = #{welfareMembers},
+            features = #{features},
+            <if test=" jobRequirements !=null and jobRequirements !='' ">
+                jobRequirements = #{jobRequirements},
+            </if>
+        </trim>
+        WHERE laborDemandId = #{laborDemandId};
+    </update>
+
+    <update id="updateBusinessPrice" parameterType="com.labour.model.LaborDemand">
+        UPDATE labor_demand
+        <trim prefix="set" suffixOverrides=",">
+            <if test=" businessPriceId !=null and businessPriceId !='' ">
+                businessPriceId = #{businessPriceId},
+            </if>
+            <if test=" businessPriceName !=null and businessPriceName !='' ">
+                businessPriceName = #{businessPriceName},
+            </if>
+            <if test=" signUnitPrice !=null and signUnitPrice !='' ">
+                signUnitPrice = #{signUnitPrice},
+            </if>
+            businessFunds = #{businessFunds},
+            <if test=" workersPrice !=null and workersPrice !='' ">
+                workersPrice = #{workersPrice},
+            </if>
+        </trim>
+        WHERE laborDemandId = #{laborDemandId};
+    </update>
+
+    <insert id="insertWelfareMember" parameterType="java.lang.String">
+        INSERT INTO welfare_member (welfareMemberId, company_id, company_full_name, welfareId, welfareName, welfare)
+        VALUES (#{welfareMemberId}, #{company_id}, #{company_full_name}, #{welfareId}, #{welfareName}, #{welfare});
+    </insert>
+
+    <delete id="deleteWmByWmId" parameterType="java.lang.String">
+        DELETE FROM welfare_member where welfareMemberId = #{welfareMemberId}
+    </delete>
+
+    <select id="selectOneLaborDemand" resultType="com.labour.model.LaborDemand" parameterType="java.lang.String">
+        SELECT laborDemandId, company_id, company_full_name, demandId, demandSource, demandSourceTypeId, demandSourceName, demandSourceId, usingCompanyId, usingCompanyName, stationName, salaryTypeId,
+                                  salaryTypeName, province_code, province_name, city_code, city_name, county_code, county_name, address, startWorkTime, endWorkTime,
+                                  resident, residentName, minAge, maxAge, genderName, genderId, shiftSystemName, shiftSystemId, operationModeName, operationModeId,
+                                  workClothesName, workClothesId, welfareMemberId, welfareMembers, features, jobRequirements, businessPriceId, businessPriceName,
+                                  signUnitPrice, businessFunds, workersPrice, status, create_time, update_time from labor_demand
+        WHERE laborDemandId = #{laborDemandId}
+    </select>
+
+    <select id="selectResident" parameterType="java.lang.String" resultType="com.labour.entity.User">
+        SELECT u.user_id,u.user_name,u.name,u.user_type_id,ut.user_type_name,ut.user_type_name,u.create_user_id,u.create_user_name,u.create_time,u.status,u.update_time,c.user_company_id,c.company_id,c.company_full_name FROM user u
+        LEFT JOIN user_company c ON c.user_id = u.user_id
+        LEFT JOIN user_type ut ON ut.user_type_id = u.user_type_id
+        <where>
+            <if test=" company_id !=null and company_id !='' ">
+                and c.company_id = #{company_id}
+            </if>
+            <if test=" user_type_id !=null and user_type_id !='' ">
+                and u.user_type_id = #{user_type_id}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteLaborDemand" parameterType="java.lang.String">
+        DELETE FROM labor_demand where laborDemandId = #{laborDemandId}
+    </delete>
+
+    <select id="selectLDByFactor" resultType="com.labour.model.LaborDemand" parameterType="java.lang.String">
+        SELECT laborDemandId, company_id, company_full_name, demandId, demandSource, demandSourceTypeId, demandSourceName, demandSourceId, usingCompanyId, usingCompanyName, stationName, salaryTypeId,
+               salaryTypeName, province_code, province_name, city_code, city_name, county_code, county_name, address, startWorkTime, endWorkTime,
+               resident, residentName, minAge, maxAge, genderName, genderId, shiftSystemName, shiftSystemId, operationModeName, operationModeId,
+               workClothesName, workClothesId, welfareMemberId, welfareMembers, features, jobRequirements, businessPriceId, businessPriceName,
+               signUnitPrice, businessFunds, workersPrice, status, create_time, update_time from labor_demand
+        <where>
+            company_id = #{company_id}
+            <if test=" usingCompanyId !=null and usingCompanyId !='' ">
+                and usingCompanyId = #{usingCompanyId}
+            </if>
+            <if test=" salaryTypeId !=null and salaryTypeId !='' ">
+                and salaryTypeId = #{salaryTypeId}
+            </if>
+            <if test=" status !=null and status !='' ">
+                and status = #{status}
+            </if>
+        </where>
+        LIMIT #{star_num},#{pageSize}
+    </select>
+
+    <select id="selectCountByFactor" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT count(*) from labor_demand
+        <where>
+            company_id = #{company_id}
+            <if test=" usingCompanyId !=null and usingCompanyId !='' ">
+                and usingCompanyId = #{usingCompanyId}
+            </if>
+            <if test=" salaryTypeId !=null and salaryTypeId !='' ">
+                and salaryTypeId = #{salaryTypeId}
+            </if>
+            <if test=" status !=null and status !='' ">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        UPDATE labor_demand
+        SET status = #{status}
+        WHERE laborDemandId = #{laborDemandId};
+    </update>
+
+</mapper>

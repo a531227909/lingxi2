@@ -27,4 +27,10 @@ public interface ApprovalService {
     Result deleteOneRaApproval(String resignationApprovalId, String company_id, String parentId);
 
     Result deleteOnePaApproval(String payAdvanceApprovalId, String company_id, String parentId);
+
+    Result updateEnApproval(String user_id, String user_type_id, String type, String entryApprovalId);
+
+    Result updateRaApproval(String user_id, String user_type_id, String type, String resignationApprovalId);
+
+    Result updatePaApproval(String user_id, String user_type_id, String type, String payAdvanceApprovalId);
 }

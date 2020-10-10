@@ -21,6 +21,18 @@
 		select user_type_id, user_type_name, status FROM user_type;
 	</select>
 
+	<select id="selectUserTypeByFactor" resultType="com.labour.model.UserType" parameterType="java.lang.String">
+		select user_type_id, user_type_name, status FROM user_type
+		<where>
+			<if test=" user_type_id !=null and user_type_id !='' ">
+				and user_type_id = #{user_type_id}
+			</if>
+			<if test=" status !=null and status !='' ">
+				and status = #{status}
+			</if>
+		</where>
+	</select>
+
 	<select id="selectAllUser" resultType="com.labour.entity.User" parameterType="java.lang.String">
 		select * FROM user;
 	</select>

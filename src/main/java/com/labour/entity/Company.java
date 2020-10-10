@@ -79,6 +79,18 @@ public class Company implements Serializable {
      */
     private Object company_pic;
     /**
+     * 公司类型ID
+     */
+    private String company_type_id;
+    /**
+     * 公司类型名称
+     */
+    private String company_type_name;
+    /**
+     * 上级ID
+     */
+    private String parentId;
+    /**
      * 创建时间
      */
     private String create_time;
@@ -231,6 +243,30 @@ public class Company implements Serializable {
         this.company_pic = company_pic;
     }
 
+    public String getCompany_type_id() {
+        return company_type_id;
+    }
+
+    public void setCompany_type_id(String company_type_id) {
+        this.company_type_id = company_type_id;
+    }
+
+    public String getCompany_type_name() {
+        return company_type_name;
+    }
+
+    public void setCompany_type_name(String company_type_name) {
+        this.company_type_name = company_type_name;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
     public String getCreate_time() {
         return create_time;
     }
@@ -265,9 +301,12 @@ public class Company implements Serializable {
                 ", county_name='" + county_name + '\'' +
                 ", address='" + address + '\'' +
                 ", company_profile='" + company_profile + '\'' +
-                ", company_business_license='" + company_business_license + '\'' +
-                ", company_logo='" + company_logo + '\'' +
-                ", company_pic='" + company_pic + '\'' +
+                ", company_business_license=" + company_business_license +
+                ", company_logo=" + company_logo +
+                ", company_pic=" + company_pic +
+                ", company_type_id='" + company_type_id + '\'' +
+                ", company_type_name='" + company_type_name + '\'' +
+                ", parentId='" + parentId + '\'' +
                 ", create_time='" + create_time + '\'' +
                 ", update_time='" + update_time + '\'' +
                 '}';

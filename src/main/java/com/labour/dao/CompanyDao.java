@@ -16,16 +16,19 @@ public interface CompanyDao {
 
     int insertOneCompany(@Param("company_full_name") String company_full_name,@Param("company_name")  String company_name,@Param("company_size")  String company_size,@Param("contact")  String contact,@Param("contact_phone")  String contact_phone,
                          @Param("contact_position") String contact_position,@Param("province_code")  String province_code,@Param("province_name")  String province_name,@Param("city_code")  String city_code,@Param("city_name")  String city_name,@Param("county_code")  String county_code,
-                         @Param("county_name") String county_name,@Param("address")  String address,@Param("company_profile")  String company_profile,@Param("company_business_license")  String company_business_license,@Param("company_logo")  String company_logo,@Param("company_pic")  String company_pic);
+                         @Param("county_name") String county_name,@Param("address") String address,@Param("company_profile")  String company_profile,@Param("company_business_license")  String company_business_license,@Param("company_logo")  String company_logo,@Param("company_pic")  String company_pic,
+                         @Param("company_type_id") String company_type_id,@Param("company_type_name") String company_type_name,@Param("parentId")  String parentId);
 
-    List<Company> selectCompanyByFactor(@Param("company_full_name") String company_full_name, @Param("company_id") String company_id, @Param("city_code") String city_code,
+    List<Company> selectCompanyByFactor(@Param("company_full_name") String company_full_name, @Param("company_id") String company_id, @Param("city_code") String city_code, @Param("contact") String contact, @Param("parentId") String parentId,
                                         @Param("star_num") int star_num, @Param("pageSize") int pageSize);
 
-    int selectCountByFactor(@Param("company_full_name") String company_full_name, @Param("company_id") String company_id, @Param("city_code") String city_code);
-
+    int selectCountByFactor(@Param("company_full_name") String company_full_name, @Param("company_id") String company_id, @Param("city_code") String city_code, @Param("contact") String contact, @Param("parentId") String parentId);
 
     int updateOneCompany(@Param("company_id") String company_id,@Param("company_full_name") String company_full_name,@Param("company_name")  String company_name,@Param("company_size")  String company_size,@Param("contact")  String contact,@Param("contact_phone")  String contact_phone,
                          @Param("contact_position") String contact_position,@Param("province_code")  String province_code,@Param("province_name")  String province_name,@Param("city_code")  String city_code,@Param("city_name")  String city_name,@Param("county_code")  String county_code,
-                         @Param("county_name") String county_name,@Param("address")  String address,@Param("company_profile")  String company_profile,@Param("company_business_license")  String company_business_license,@Param("company_logo")  String company_logo,@Param("company_pic")  String company_pic);
+                         @Param("county_name") String county_name,@Param("address") String address,@Param("company_profile")  String company_profile,@Param("company_business_license")  String company_business_license,@Param("company_logo")  String company_logo,@Param("company_pic")  String company_pic,
+                         @Param("company_type_id") String company_type_id,@Param("company_type_name") String company_type_name,@Param("parentId")  String parentId);
+
+    List<Company> selectThirdParty(@Param("company_type_id") String company_type_id,@Param("parentId") String parentId);
 
 }

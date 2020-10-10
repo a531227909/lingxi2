@@ -4,18 +4,18 @@
 
 	<select id="selectOneCompany" resultType="com.labour.entity.Company" parameterType="java.lang.String">
 		select company_id, company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name,
-		county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, create_time, update_time FROM company
+		county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, company_type_id, company_type_name, parentId, create_time, update_time FROM company
 		where company_id=#{company_id};
 	</select>
 
 	<insert id="insertOneCompany" parameterType="java.lang.String">
-		INSERT INTO company (company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name, county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic)
-		VALUES (#{company_full_name}, #{company_name}, #{company_size}, #{contact}, #{contact_phone}, #{contact_position}, #{province_code}, #{province_name}, #{city_code}, #{city_name}, #{county_code}, #{county_name}, #{address}, #{company_profile}, #{company_business_license}, #{company_logo}, #{company_pic});
+		INSERT INTO company (company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name, county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, company_type_id, company_type_name, parentId)
+		VALUES (#{company_full_name}, #{company_name}, #{company_size}, #{contact}, #{contact_phone}, #{contact_position}, #{province_code}, #{province_name}, #{city_code}, #{city_name}, #{county_code}, #{county_name}, #{address}, #{company_profile}, #{company_business_license}, #{company_logo}, #{company_pic}, #{company_type_id}, #{company_type_name}, #{parentId});
 	</insert>
 
 	<select id="selectCompanyByFactor" resultType="com.labour.entity.Company" parameterType="java.lang.String">
 		SELECT company_id, company_full_name, company_name, company_size, contact, contact_phone, contact_position, province_code, province_name, city_code, city_name,
-		county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, create_time, update_time FROM company
+		county_code, county_name, address, company_profile, company_business_license, company_logo, company_pic, company_type_id, company_type_name, parentId, create_time, update_time FROM company
 		<where>
 			<if test=" company_full_name !=null and company_full_name !='' ">
 				and company_full_name = #{company_full_name}
@@ -23,8 +23,14 @@
 			<if test=" company_id !=null and company_id !='' ">
 				and company_id = #{company_id}
 			</if>
+			<if test=" contact !=null and contact !='' ">
+				and contact = #{contact}
+			</if>
 			<if test=" city_code !=null and city_code !='' ">
 				and city_code = #{city_code}
+			</if>
+			<if test=" parentId !=null and parentId !='' ">
+				and parentId = #{parentId}
 			</if>
 		</where>
 		LIMIT #{star_num},#{pageSize}
@@ -39,8 +45,14 @@
 			<if test=" company_id !=null and company_id !='' ">
 				and company_id = #{company_id}
 			</if>
+			<if test=" contact !=null and contact !='' ">
+				and contact = #{contact}
+			</if>
 			<if test=" city_code !=null and city_code !='' ">
 				and city_code = #{city_code}
+			</if>
+			<if test=" parentId !=null and parentId !='' ">
+				and parentId = #{parentId}
 			</if>
 		</where>
 	</select>
@@ -99,8 +111,22 @@
 			<if test=" company_pic !=null and company_pic !='' ">
 				company_pic = #{company_pic},
 			</if>
+			<if test=" company_type_id !=null and company_type_id !='' ">
+				company_type_id = #{company_type_id},
+			</if>
+			<if test=" company_type_name !=null and company_type_name !='' ">
+				company_type_name = #{company_type_name},
+			</if>
+			<if test=" parentId !=null and parentId !='' ">
+				parentId = #{parentId},
+			</if>
 		</trim>
 		WHERE company_id = #{company_id}
 	</update>
+
+	<select id="selectThirdParty" parameterType="java.lang.String" resultType="com.labour.entity.Company">
+		SELECT company_id, company_full_name, company_type_id, company_type_name, parentId from company
+		WHERE company_type_id = #{company_type_id} AND parentId = #{parentId}
+	</select>
 
 </mapper>

@@ -97,6 +97,14 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping(value="/selectUserTypeByFactor")
+    @ResponseBody
+    public Result selectUserTypeByFactor(String user_type_id, String status){
+        Result result = new Result();
+        result = userService.selectUserTypeByFactor(user_type_id, status);
+        return result;
+    }
+
     @RequestMapping(value="/resetUserPassword")
     @ResponseBody
     public Result resetUserPassword(String user_name){

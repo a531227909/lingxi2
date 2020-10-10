@@ -75,6 +75,16 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
     }
 
     @Override
+    public Result selectUserTypeByFactor(String user_type_id, String status) {
+        Result result = new Result();
+        List<UserType> userTypes = userDao.selectUserTypeByFactor(user_type_id, status);
+        result.setCode("1000");
+        result.setMsg("查询成功");
+        result.setData(userTypes);
+        return result;
+    }
+
+    @Override
     public Result updatePassword(String user_name, String password) {
         Result result = new Result();
         User user = userDao.selectOneUser(user_name);
@@ -120,8 +130,8 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
         int star_num = (Integer.parseInt(page)-1)*10;
         int pageSize = 10;
         int count = userDao.selectCountByFactor(company_id, name, user_name, user_type_id);
-        List<User> users = userDao.selectUserByFactor(company_id, name, user_name, user_type_id, star_num, pageSize);
         String pages = String.valueOf(count/pageSize + 1);
+        List<User> users = userDao.selectUserByFactor(company_id, name, user_name, user_type_id, star_num, pageSize);
         pagesResult.setCode("1000");
         pagesResult.setMsg("查询成功");
         pagesResult.setPages(pages);

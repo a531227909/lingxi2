@@ -17,6 +17,8 @@ public interface UserDao {
 
     List<UserType> selectAllUserType();
 
+    List<UserType> selectUserTypeByFactor(@Param("user_type_id") String user_type_id,@Param("status")  String status);
+
     User selectOneUser(@Param("user_name") String user_name);
 
     List<User> selectAllUser();

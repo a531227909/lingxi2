@@ -4,8 +4,8 @@ import com.labour.entity.Result;
 
 public interface TAreaService {
 
-    public Result selectAreaByLevel(String level);
+    Result selectAreaByLevel(String level);
 
-    public Result selectAreaByParentId(String parentId);
+    Result selectAreaByParentId(String parentId);
 
 }

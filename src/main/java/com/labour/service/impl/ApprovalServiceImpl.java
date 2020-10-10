@@ -146,7 +146,7 @@ public class ApprovalServiceImpl extends ApplicationObjectSupport implements App
             Approval approvalSon = approvalDao.selectOneEntryApproval(company_id, parentId,  "", "","");
             i = approvalDao.insertOneEnApproval(company_id, parentId, user_id, user_type_id, type);
             if(approvalSon!=null){
-                Approval approval = approvalDao.selectOneEntryApproval(company_id, parentId, user_id, "", "");
+                Approval approval = approvalDao.selectOneEntryApproval(company_id, parentId, user_id, user_type_id, "");
                 j = approvalDao.updateOneEnApproval("", approval.getEntryApprovalId(), "", "", "", approvalSon.getEntryApprovalId());
                 if(i == 1){
                     if(j == 1){
@@ -206,7 +206,7 @@ public class ApprovalServiceImpl extends ApplicationObjectSupport implements App
             Approval approvalSon = approvalDao.selectOneRaApproval(company_id, parentId,  "", "","");
             i = approvalDao.insertOneRaApproval(company_id, parentId, user_id, user_type_id, type);
             if(approvalSon!=null){
-                Approval approval = approvalDao.selectOneRaApproval(company_id, parentId, user_id, "", "");
+                Approval approval = approvalDao.selectOneRaApproval(company_id, parentId, user_id, user_type_id, "");
                 j = approvalDao.updateOneRaApproval("", approval.getResignationApprovalId(), "", "", "", approvalSon.getResignationApprovalId());
                 if(i == 1){
                     if(j == 1){
@@ -266,7 +266,7 @@ public class ApprovalServiceImpl extends ApplicationObjectSupport implements App
             Approval approvalSon = approvalDao.selectOnePaApproval(company_id, parentId,  "", "","");
             i = approvalDao.insertOnePaApproval(company_id, parentId, user_id, user_type_id, type);
             if(approvalSon!=null){
-                Approval approval = approvalDao.selectOnePaApproval(company_id, parentId, user_id, "", "");
+                Approval approval = approvalDao.selectOnePaApproval(company_id, parentId, user_id, user_type_id, "");
                 j = approvalDao.updateOnePaApproval("", approval.getPayAdvanceApprovalId(), "", "", "", approvalSon.getPayAdvanceApprovalId());
                 if(i == 1){
                     if(j == 1){
@@ -407,5 +407,86 @@ public class ApprovalServiceImpl extends ApplicationObjectSupport implements App
             }
         }
         return  result;
+    }
+
+    @Override
+    public Result updateEnApproval(String user_id, String user_type_id, String type, String entryApprovalId) {
+        Result result = new Result();
+        if(StringUtils.isBlank(user_id)){
+            //user_id为空赋值为0
+            user_id = "0";
+        }
+        if(StringUtils.isBlank(user_type_id)){
+            //user_type_id为空赋值为0
+            user_type_id = "0";
+        }
+        if(user_id.equals("0")&&user_type_id.equals("0")){
+            result.setCode("1001");
+            result.setMsg("用户ID和部门ID不能同时为空或为0");
+            return result;
+        }
+        int i = approvalDao.updateOneEnApproval("", "", user_id, user_type_id, type, entryApprovalId);
+        if(i == 1){
+            result.setCode("1000");
+            result.setMsg("更新成功");
+        }else{
+            result.setCode("1001");
+            result.setMsg("系统故障,更新失败");
+        }
+        return result;
+    }
+
+    @Override
+    public Result updateRaApproval(String user_id, String user_type_id, String type, String resignationApprovalId) {
+        Result result = new Result();
+        if(StringUtils.isBlank(user_id)){
+            //user_id为空赋值为0
+            user_id = "0";
+        }
+        if(StringUtils.isBlank(user_type_id)){
+            //user_type_id为空赋值为0
+            user_type_id = "0";
+        }
+        if(user_id.equals("0")&&user_type_id.equals("0")){
+            result.setCode("1001");
+            result.setMsg("用户ID和部门ID不能同时为空或为0");
+            return result;
+        }
+        int i = approvalDao.updateOneRaApproval("", "", user_id, user_type_id, type, resignationApprovalId);
+        if(i == 1){
+            result.setCode("1000");
+            result.setMsg("更新成功");
+        }else{
+            result.setCode("1001");
+            result.setMsg("系统故障,更新失败");
+        }
+        return result;
+    }
+
+    @Override
+    public Result updatePaApproval(String user_id, String user_type_id, String type, String payAdvanceApprovalId) {
+        Result result = new Result();
+        if(StringUtils.isBlank(user_id)){
+            //user_id为空赋值为0
+            user_id = "0";
+        }
+        if(StringUtils.isBlank(user_type_id)){
+            //user_type_id为空赋值为0
+            user_type_id = "0";
+        }
+        if(user_id.equals("0")&&user_type_id.equals("0")){
+            result.setCode("1001");
+            result.setMsg("用户ID和部门ID不能同时为空或为0");
+            return result;
+        }
+        int i = approvalDao.updateOnePaApproval("", "", user_id, user_type_id, type, payAdvanceApprovalId);
+        if(i == 1){
+            result.setCode("1000");
+            result.setMsg("更新成功");
+        }else{
+            result.setCode("1001");
+            result.setMsg("系统故障,更新失败");
+        }
+        return result;
     }
 }

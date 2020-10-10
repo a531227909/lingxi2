@@ -252,7 +252,7 @@ public class ApprovalController {
         Result result = new Result();
         if(StringUtils.isBlank(payAdvanceApprovalId)){
             result.setCode("1001");
-            result.setMsg("入职审核权限ID不能为空");
+            result.setMsg("预支审核权限ID不能为空");
             return result;
         }else if(StringUtils.isBlank(company_id)){
             result.setCode("1001");
@@ -264,6 +264,45 @@ public class ApprovalController {
             return result;
         }
         result = approvalService.deleteOnePaApproval(payAdvanceApprovalId, company_id, parentId);
+        return result;
+    }
+
+    @RequestMapping(value="/updateEnApproval")
+    @ResponseBody
+    public Result updateEnApproval(String user_id, String user_type_id, String type, String entryApprovalId){
+        Result result = new Result();
+        if(StringUtils.isBlank(entryApprovalId)){
+            result.setCode("1001");
+            result.setMsg("入职审核权限ID不能为空");
+            return result;
+        }
+        result = approvalService.updateEnApproval(user_id, user_type_id, type, entryApprovalId);
+        return result;
+    }
+
+    @RequestMapping(value="/updateRaApproval")
+    @ResponseBody
+    public Result updateRaApproval(String user_id, String user_type_id, String type, String resignationApprovalId){
+        Result result = new Result();
+        if(StringUtils.isBlank(resignationApprovalId)){
+            result.setCode("1001");
+            result.setMsg("离职审核权限ID不能为空");
+            return result;
+        }
+        result = approvalService.updateRaApproval(user_id, user_type_id, type, resignationApprovalId);
+        return result;
+    }
+
+    @RequestMapping(value="/updatePaApproval")
+    @ResponseBody
+    public Result updatePaApproval(String user_id, String user_type_id, String type, String payAdvanceApprovalId){
+        Result result = new Result();
+        if(StringUtils.isBlank(payAdvanceApprovalId)){
+            result.setCode("1001");
+            result.setMsg("预支审核权限ID不能为空");
+            return result;
+        }
+        result = approvalService.updatePaApproval(user_id, user_type_id, type, payAdvanceApprovalId);
         return result;
     }
 }

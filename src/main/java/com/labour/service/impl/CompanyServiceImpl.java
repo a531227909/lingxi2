@@ -37,7 +37,8 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
     @Override
     public Result insertOneCompany(String company_full_name, String company_name, String company_size, String contact, String contact_phone,
                                    String contact_position, String province_code, String province_name, String city_code, String city_name, String county_code,
-                                   String county_name, String address, String company_profile, List<MultipartFile> company_business_license, List<MultipartFile> company_logo, List<MultipartFile> company_pic) {
+                                   String county_name, String address, String company_profile, List<MultipartFile> company_business_license, List<MultipartFile> company_logo, List<MultipartFile> company_pic,
+                                   String company_type_id, String company_type_name, String parentId) {
         Result result = new Result();
         //上传路径
         String path = upLoadImg.getPath();
@@ -57,7 +58,7 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
         String cpId = UUIDUtils.getUUID();
         int i = companyDao.insertOneCompany(company_full_name, company_name, company_size, contact, contact_phone,
                 contact_position, province_code, province_name, city_code, city_name, county_code,
-                county_name, address, company_profile, cblId, clId, cpId);
+                county_name, address, company_profile, cblId, clId, cpId, company_type_id, company_type_name, parentId);
         if(cblnames!=null && cblnames.size()>=0){
             for(String pictureName : cblnames){
                 pictureNameDao.insertOnepictureName(cblId, pictureName);
@@ -84,12 +85,12 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
     }
 
     @Override
-    public PagesResult selectCompanyByFactor(String company_full_name, String company_id, String city_code, String page) {
+    public PagesResult selectCompanyByFactor(String company_full_name, String company_id, String city_code, String contact, String parentId, String page) {
         PagesResult pagesResult = new PagesResult();
         int star_num = (Integer.parseInt(page)-1)*10;
         int pageSize = 10;
-        int count = companyDao.selectCountByFactor(company_full_name, company_id, city_code);
-        List<Company> companies = companyDao.selectCompanyByFactor(company_full_name, company_id, city_code, star_num, pageSize);
+        int count = companyDao.selectCountByFactor(company_full_name, company_id, city_code, contact, parentId);
+        List<Company> companies = companyDao.selectCompanyByFactor(company_full_name, company_id, city_code,contact, parentId, star_num, pageSize);
         String pages = String.valueOf(count/pageSize + 1);
         if(companies.size()!=0){
             for (Company company : companies){
@@ -124,7 +125,8 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
     @Override
     public Result updateOneCompany(String company_id, String company_full_name, String company_name, String company_size, String contact, String contact_phone,
                                    String contact_position, String province_code, String province_name, String city_code, String city_name, String county_code,
-                                   String county_name, String address, String company_profile, List<MultipartFile> company_business_license, List<MultipartFile> company_logo, List<MultipartFile> company_pic) {
+                                   String county_name, String address, String company_profile, List<MultipartFile> company_business_license, List<MultipartFile> company_logo, List<MultipartFile> company_pic,
+                                   String company_type_id, String company_type_name, String parentId) {
         Result result = new Result();
         //上传路径
         String path = upLoadImg.getPath();
@@ -161,7 +163,7 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
         }
         int n = companyDao.updateOneCompany(company_id, company_full_name, company_name, company_size, contact, contact_phone,
                 contact_position, province_code, province_name, city_code, city_name, county_code,
-                county_name, address, company_profile, "", "", "");
+                county_name, address, company_profile, "", "", "", company_type_id, company_type_name, parentId);
         if(n == 1){
             result.setCode("1000");
             result.setMsg("更新状态成功");
