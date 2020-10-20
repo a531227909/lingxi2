@@ -64,4 +64,18 @@ public class DispatchedController {
         return result;
     }
 
+    @RequestMapping(value="/updateUserJobStatus")
+    @ResponseBody
+    public Result updateUserJobStatus(String userJobId, String jobStatusId, String jobStatus, String jobStatusTypeId, String jobStatusType, String jobStatusReasonId,
+                                      String jobStatusReason, String jobStatusExplain){
+        Result result = new Result();
+        if(StringUtils.isBlank(userJobId)){
+            result.setCode("1001");
+            result.setMsg("用户工作岗位ID不能为空");
+            return result;
+        }
+        result = dispatchedService.updateUserJobStatus(userJobId, jobStatusId, jobStatus, jobStatusTypeId, jobStatusType, jobStatusReasonId, jobStatusReason, jobStatusExplain);
+        return result;
+    }
+
 }

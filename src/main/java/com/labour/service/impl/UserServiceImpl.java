@@ -4,15 +4,18 @@ import com.labour.dao.CompanyDao;
 import com.labour.dao.UserDao;
 import com.labour.entity.Company;
 import com.labour.entity.Result;
+import com.labour.entity.UpLoadImg;
 import com.labour.entity.User;
 import com.labour.model.PagesResult;
 import com.labour.model.UserType;
 import com.labour.service.UserService;
 import com.labour.utils.Md5Utils;
+import com.labour.utils.UploadFileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -28,6 +31,9 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
 
     @Resource
     private CompanyDao companyDao;
+
+    @Resource
+    private UpLoadImg upLoadImg;
 
     @Override
     public Result addOneUser(String user_name, String password, String name, String user_type_id, String company_id, String create_user_id, String create_user_name) {
@@ -147,6 +153,23 @@ public class UserServiceImpl extends ApplicationObjectSupport implements UserSer
         result.setCode("1000");
         result.setMsg("查询成功");
         result.setData(userTypes);
+        return result;
+    }
+
+    @Override
+    public Result userRegister(String user_id, String name, String phoneNum, String idCard, String genderId, String genderName, String province_code, String province_name, String city_code, String city_name, String county_code, String county_name, MultipartFile idCardFront, MultipartFile idCardReverse) {
+        Result result = new Result();
+        String path = upLoadImg.getIdCardImgPath();
+        String icf = UploadFileUtils.uploadOneFile(idCardFront,path);
+        String icr = UploadFileUtils.uploadOneFile(idCardReverse,path);
+        int i = userDao.userRegister(user_id, name, phoneNum, idCard, genderId, genderName, province_code, province_name, city_code, city_name, county_code, county_name, icf, icr);
+        if(i == 1){
+            result.setCode("1000");
+            result.setMsg("信息登记成功");
+        }else{
+            result.setCode("1001");
+            result.setMsg("系统故障，信息登记失败");
+        }
         return result;
     }
 

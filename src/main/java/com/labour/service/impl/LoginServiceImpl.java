@@ -2,6 +2,7 @@ package com.labour.service.impl;
 
 import com.labour.dao.UserDao;
 import com.labour.entity.Result;
+import com.labour.entity.UpLoadImg;
 import com.labour.entity.User;
 import com.labour.plugins.LabourPluginFactory;
 import com.labour.plugins.Plugin;
@@ -45,7 +46,7 @@ public class LoginServiceImpl extends ApplicationObjectSupport implements LoginS
             result.setCode("1000");
             result.setMsg("登录成功");
             result.setData(user);
-            logger.info("用户:"+user_name+"登陆成功  IP:"+ip);
+            logger.info("用户:"+user_name+"登陆成功 IP:"+ip);
         }else{
             result.setCode("1001");
             result.setMsg("您的账号或密码有误");
@@ -60,6 +61,40 @@ public class LoginServiceImpl extends ApplicationObjectSupport implements LoginS
         result.setCode("1000");
         result.setMsg(data);
         result.setData(users);
+        return result;
+    }
+
+    @Override
+    public Result doWechatLogin(String weChatId, String headImage, String petName, String ip) {
+        Result result = new Result();
+        User user = new User();
+        user = userDao.selectOneWechatUser(weChatId);
+        if(user == null || user.equals("")){
+            //默认为普通用户类型
+            String user_type_id = "1";
+            //默认用户启用
+            String status = "1";
+            int i = userDao.addWeChatUser(weChatId, headImage, petName, user_type_id, status);
+            if(i == 1){
+                String token = TokenUtils.token(weChatId, weChatId);
+                user = userDao.selectOneWechatUser(weChatId);
+                user.setToken(token);
+                result.setCode("1000");
+                result.setMsg("微信用户登录成功");
+                result.setData(user);
+                logger.info("微信用户:"+weChatId+"登陆成功 IP:"+ip);
+            }else{
+                result.setCode("1001");
+                result.setMsg("系统故障，微信用户登录失败");
+            }
+        }else{
+            String token = TokenUtils.token(weChatId, weChatId);
+            user.setToken(token);
+            result.setCode("1000");
+            result.setMsg("微信用户登录成功");
+            result.setData(user);
+            logger.info("微信用户:"+weChatId+"登陆成功 IP:"+ip);
+        }
         return result;
     }
 

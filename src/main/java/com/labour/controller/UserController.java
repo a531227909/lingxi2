@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -162,6 +163,35 @@ public class UserController {
             return result;
         }
         result = userService.selectUsersCount(status, company_id);
+        return result;
+    }
+
+    @RequestMapping(value="/userRegister")
+    @ResponseBody
+    public Result userRegister(String user_id, String name, String phoneNum, String idCard, String genderId, String genderName, String province_code, String province_name, String city_code, String city_name, String county_code, String county_name, MultipartFile idCardFront, MultipartFile idCardReverse){
+        Result result = new Result();
+        if(StringUtils.isBlank(user_id)){
+            result.setCode("1001");
+            result.setMsg("用户ID不能为空");
+            return result;
+        }else if(StringUtils.isBlank(name)){
+            result.setCode("1001");
+            result.setMsg("真实姓名不能为空");
+            return result;
+        }else if(StringUtils.isBlank(phoneNum)){
+            result.setCode("1001");
+            result.setMsg("联系方式不能为空");
+            return result;
+        }else if(StringUtils.isBlank(idCard)){
+            result.setCode("1001");
+            result.setMsg("身份证号不能为空");
+            return result;
+        }else if(StringUtils.isBlank(genderId)||StringUtils.isBlank(genderName)){
+            result.setCode("1001");
+            result.setMsg("性别不能为空");
+            return result;
+        }
+        result = userService.userRegister(user_id, name, phoneNum, idCard, genderId, genderName, province_code, province_name, city_code, city_name, county_code, county_name, idCardFront, idCardReverse);
         return result;
     }
 

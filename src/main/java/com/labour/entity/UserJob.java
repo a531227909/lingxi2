@@ -1,111 +1,35 @@
-package com.labour.model;
+package com.labour.entity;
 
 import java.io.Serializable;
 
-public class Dispatched implements Serializable {
+public class UserJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 工作审核自增ID
+     * id
      */
-    private String workAuditId;
-    /**
-     * 工作申请ID
-     */
-    private String workReviewId;
-    /**
-     * 审核节点ID
-     */
-    private String flow_node_id;
-    /**
-     * 审批用户ID
-     */
-    private String auditUserId;
-    /**
-     * 审批人姓名
-     */
-    private String auditName;
-    /**
-     * 审批部门ID
-     */
-    private String user_type_id;
-    /**
-     * 审批部门名称
-     */
-    private String user_type_name;
-    /**
-     * 审核人员类型ID
-     */
-    private String approvalTypeId;
-    /**
-     * 审核人员类型
-     */
-    private String approvalType;
-    /**
-     * 是否批准 0:拒绝 1:同意
-     */
-    private String isOk;
-    /**
-     * 审批意见
-     */
-    private String audit_info;
-    /**
-     * 审核状态 审核还是未审核 0:未审核 1:审核完成
-     */
-    private String workAuditStatus;
-    /**
-     * 用户ID
-     */
-    private String user_id;
+    private int id;
     /**
      * 用户工作岗位ID
      */
     private String userJobId;
     /**
-     * 工作申请类型Id
+     * 用户ID
      */
-    private String workReviewTypeId;
-    /**
-     * 工作申请类型
-     */
-    private String workReviewType;
-    /**
-     * 用户名
-     */
-    private String name;
-    /**
-     * 所属公司ID
-     */
-    private String company_id;
-    /**
-     * 所属公司全称
-     */
-    private String company_full_name;
-    /**
-     * 用工公司ID
-     */
-    private String usingCompanyId;
-    /**
-     * 用工公司名称
-     */
-    private String usingCompanyName;
-    /**
-     * 审核原因
-     */
-    private String reviewReason;
-    /**
-     * 当前申请权限节点编号
-     */
-    private String workAuditCurrentNode;
-    /**
-     * 审核状态 审核还是未审核 0:未审核 1:审核完成
-     */
-    private String workReviewStatus;
+    private String user_id;
     /**
      * 用户公司ID
      */
     private String user_company_id;
+    /**
+     * 公司ID
+     */
+    private String company_id;
+    /**
+     * 公司全称
+     */
+    private String company_full_name;
     /**
      * 入职时间
      */
@@ -158,6 +82,14 @@ public class Dispatched implements Serializable {
      * 详细地址
      */
     private String address;
+    /**
+     * 用工公司ID
+     */
+    private String usingCompanyId;
+    /**
+     * 用工公司名称
+     */
+    private String usingCompanyName;
     /**
      * 岗位名称
      */
@@ -247,140 +179,20 @@ public class Dispatched implements Serializable {
      */
     private String jobStatusExplain;
     /**
-     * 身份证
+     * 创建时间
      */
-    private String idCard;
+    private String create_time;
     /**
-     * phoneNum
+     * 更新时间
      */
-    private String phoneNum;
-    /**
-     * 性别ID
-     */
-    private String genderId;
-    /**
-     * 性别名称
-     */
-    private String genderName;
-    /**
-     * 民族
-     */
-    private String nation;
-    /**
-     * 学历
-     */
-    private String education;
-    /**
-     * 身份证正面
-     */
-    private String idCardFront;
-    /**
-     * 身份证反面
-     */
-    private String idCardReverse;
+    private String update_time;
 
-    public String getWorkAuditId() {
-        return workAuditId;
+    public int getId() {
+        return id;
     }
 
-    public void setWorkAuditId(String workAuditId) {
-        this.workAuditId = workAuditId;
-    }
-
-    public String getWorkReviewId() {
-        return workReviewId;
-    }
-
-    public void setWorkReviewId(String workReviewId) {
-        this.workReviewId = workReviewId;
-    }
-
-    public String getFlow_node_id() {
-        return flow_node_id;
-    }
-
-    public void setFlow_node_id(String flow_node_id) {
-        this.flow_node_id = flow_node_id;
-    }
-
-    public String getAuditUserId() {
-        return auditUserId;
-    }
-
-    public void setAuditUserId(String auditUserId) {
-        this.auditUserId = auditUserId;
-    }
-
-    public String getAuditName() {
-        return auditName;
-    }
-
-    public void setAuditName(String auditName) {
-        this.auditName = auditName;
-    }
-
-    public String getUser_type_id() {
-        return user_type_id;
-    }
-
-    public void setUser_type_id(String user_type_id) {
-        this.user_type_id = user_type_id;
-    }
-
-    public String getUser_type_name() {
-        return user_type_name;
-    }
-
-    public void setUser_type_name(String user_type_name) {
-        this.user_type_name = user_type_name;
-    }
-
-    public String getApprovalTypeId() {
-        return approvalTypeId;
-    }
-
-    public void setApprovalTypeId(String approvalTypeId) {
-        this.approvalTypeId = approvalTypeId;
-    }
-
-    public String getApprovalType() {
-        return approvalType;
-    }
-
-    public void setApprovalType(String approvalType) {
-        this.approvalType = approvalType;
-    }
-
-    public String getIsOk() {
-        return isOk;
-    }
-
-    public void setIsOk(String isOk) {
-        this.isOk = isOk;
-    }
-
-    public String getAudit_info() {
-        return audit_info;
-    }
-
-    public void setAudit_info(String audit_info) {
-        this.audit_info = audit_info;
-    }
-
-    public String getWorkAuditStatus() {
-        return workAuditStatus;
-    }
-
-    public void setWorkAuditStatus(String workAuditStatus) {
-        this.workAuditStatus = workAuditStatus;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserJobId() {
@@ -391,28 +203,20 @@ public class Dispatched implements Serializable {
         this.userJobId = userJobId;
     }
 
-    public String getWorkReviewTypeId() {
-        return workReviewTypeId;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setWorkReviewTypeId(String workReviewTypeId) {
-        this.workReviewTypeId = workReviewTypeId;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
-    public String getWorkReviewType() {
-        return workReviewType;
+    public String getUser_company_id() {
+        return user_company_id;
     }
 
-    public void setWorkReviewType(String workReviewType) {
-        this.workReviewType = workReviewType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_company_id(String user_company_id) {
+        this.user_company_id = user_company_id;
     }
 
     public String getCompany_id() {
@@ -429,54 +233,6 @@ public class Dispatched implements Serializable {
 
     public void setCompany_full_name(String company_full_name) {
         this.company_full_name = company_full_name;
-    }
-
-    public String getUsingCompanyId() {
-        return usingCompanyId;
-    }
-
-    public void setUsingCompanyId(String usingCompanyId) {
-        this.usingCompanyId = usingCompanyId;
-    }
-
-    public String getUsingCompanyName() {
-        return usingCompanyName;
-    }
-
-    public void setUsingCompanyName(String usingCompanyName) {
-        this.usingCompanyName = usingCompanyName;
-    }
-
-    public String getReviewReason() {
-        return reviewReason;
-    }
-
-    public void setReviewReason(String reviewReason) {
-        this.reviewReason = reviewReason;
-    }
-
-    public String getWorkAuditCurrentNode() {
-        return workAuditCurrentNode;
-    }
-
-    public void setWorkAuditCurrentNode(String workAuditCurrentNode) {
-        this.workAuditCurrentNode = workAuditCurrentNode;
-    }
-
-    public String getWorkReviewStatus() {
-        return workReviewStatus;
-    }
-
-    public void setWorkReviewStatus(String workReviewStatus) {
-        this.workReviewStatus = workReviewStatus;
-    }
-
-    public String getUser_company_id() {
-        return user_company_id;
-    }
-
-    public void setUser_company_id(String user_company_id) {
-        this.user_company_id = user_company_id;
     }
 
     public String getStartJobTime() {
@@ -581,6 +337,22 @@ public class Dispatched implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUsingCompanyId() {
+        return usingCompanyId;
+    }
+
+    public void setUsingCompanyId(String usingCompanyId) {
+        this.usingCompanyId = usingCompanyId;
+    }
+
+    public String getUsingCompanyName() {
+        return usingCompanyName;
+    }
+
+    public void setUsingCompanyName(String usingCompanyName) {
+        this.usingCompanyName = usingCompanyName;
     }
 
     public String getStationName() {
@@ -759,99 +531,30 @@ public class Dispatched implements Serializable {
         this.jobStatusExplain = jobStatusExplain;
     }
 
-    public String getIdCard() {
-        return idCard;
+    public String getCreate_time() {
+        return create_time;
     }
 
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getUpdate_time() {
+        return update_time;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
-
-    public String getGenderId() {
-        return genderId;
-    }
-
-    public void setGenderId(String genderId) {
-        this.genderId = genderId;
-    }
-
-    public String getGenderName() {
-        return genderName;
-    }
-
-    public void setGenderName(String genderName) {
-        this.genderName = genderName;
-    }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getIdCardFront() {
-        return idCardFront;
-    }
-
-    public void setIdCardFront(String idCardFront) {
-        this.idCardFront = idCardFront;
-    }
-
-    public String getIdCardReverse() {
-        return idCardReverse;
-    }
-
-    public void setIdCardReverse(String idCardReverse) {
-        this.idCardReverse = idCardReverse;
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
     }
 
     @Override
     public String toString() {
-        return "Dispatched{" +
-                "workAuditId='" + workAuditId + '\'' +
-                ", workReviewId='" + workReviewId + '\'' +
-                ", flow_node_id='" + flow_node_id + '\'' +
-                ", auditUserId='" + auditUserId + '\'' +
-                ", auditName='" + auditName + '\'' +
-                ", user_type_id='" + user_type_id + '\'' +
-                ", user_type_name='" + user_type_name + '\'' +
-                ", approvalTypeId='" + approvalTypeId + '\'' +
-                ", approvalType='" + approvalType + '\'' +
-                ", isOk='" + isOk + '\'' +
-                ", audit_info='" + audit_info + '\'' +
-                ", workAuditStatus='" + workAuditStatus + '\'' +
+        return "UserJob{" +
+                "userJobId='" + userJobId + '\'' +
                 ", user_id='" + user_id + '\'' +
-                ", userJobId='" + userJobId + '\'' +
-                ", workReviewTypeId='" + workReviewTypeId + '\'' +
-                ", workReviewType='" + workReviewType + '\'' +
-                ", name='" + name + '\'' +
+                ", user_company_id='" + user_company_id + '\'' +
                 ", company_id='" + company_id + '\'' +
                 ", company_full_name='" + company_full_name + '\'' +
-                ", usingCompanyId='" + usingCompanyId + '\'' +
-                ", usingCompanyName='" + usingCompanyName + '\'' +
-                ", reviewReason='" + reviewReason + '\'' +
-                ", workAuditCurrentNode='" + workAuditCurrentNode + '\'' +
-                ", workReviewStatus='" + workReviewStatus + '\'' +
-                ", user_company_id='" + user_company_id + '\'' +
                 ", startJobTime='" + startJobTime + '\'' +
                 ", endJobTime='" + endJobTime + '\'' +
                 ", promoteTeamId='" + promoteTeamId + '\'' +
@@ -865,6 +568,8 @@ public class Dispatched implements Serializable {
                 ", county_code='" + county_code + '\'' +
                 ", county_name='" + county_name + '\'' +
                 ", address='" + address + '\'' +
+                ", usingCompanyId='" + usingCompanyId + '\'' +
+                ", usingCompanyName='" + usingCompanyName + '\'' +
                 ", stationName='" + stationName + '\'' +
                 ", workersPrice='" + workersPrice + '\'' +
                 ", salaryTypeId='" + salaryTypeId + '\'' +
@@ -887,14 +592,9 @@ public class Dispatched implements Serializable {
                 ", jobStatusReasonId='" + jobStatusReasonId + '\'' +
                 ", jobStatusReason='" + jobStatusReason + '\'' +
                 ", jobStatusExplain='" + jobStatusExplain + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
-                ", genderId='" + genderId + '\'' +
-                ", genderName='" + genderName + '\'' +
-                ", nation='" + nation + '\'' +
-                ", education='" + education + '\'' +
-                ", idCardFront='" + idCardFront + '\'' +
-                ", idCardReverse='" + idCardReverse + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", update_time='" + update_time + '\'' +
                 '}';
     }
+
 }

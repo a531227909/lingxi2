@@ -17,31 +17,53 @@ public class UpLoadImg implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String path;
+    private String companyImgPath;
 
-    private String url;
+    private String companyImgUrl;
 
-    public String getPath() {
-        return path;
+    private String idCardImgPath;
+
+    private String idCardImgUrl;
+
+    public String getCompanyImgPath() {
+        return companyImgPath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setCompanyImgPath(String companyImgPath) {
+        this.companyImgPath = companyImgPath;
     }
 
-    public String getUrl() {
-        return url;
+    public String getCompanyImgUrl() {
+        return companyImgUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCompanyImgUrl(String companyImgUrl) {
+        this.companyImgUrl = companyImgUrl;
+    }
+
+    public String getIdCardImgPath() {
+        return idCardImgPath;
+    }
+
+    public void setIdCardImgPath(String idCardImgPath) {
+        this.idCardImgPath = idCardImgPath;
+    }
+
+    public String getIdCardImgUrl() {
+        return idCardImgUrl;
+    }
+
+    public void setIdCardImgUrl(String idCardImgUrl) {
+        this.idCardImgUrl = idCardImgUrl;
     }
 
     @Override
     public String toString() {
         return "UpLoadImg{" +
-                "path='" + path + '\'' +
-                ", url='" + url + '\'' +
+                "companyImgPath='" + companyImgPath + '\'' +
+                ", companyImgUrl='" + companyImgUrl + '\'' +
+                ", idCardImgPath='" + idCardImgPath + '\'' +
+                ", idCardImgUrl='" + idCardImgUrl + '\'' +
                 '}';
     }
 

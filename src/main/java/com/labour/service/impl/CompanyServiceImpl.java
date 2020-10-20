@@ -41,7 +41,7 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
                                    String company_type_id, String company_type_name, String parentId) {
         Result result = new Result();
         //上传路径
-        String path = upLoadImg.getPath();
+        String path = upLoadImg.getCompanyImgPath();
         //上传工具类
         UploadFileUtils uploadTools = new UploadFileUtils();
         //公司营业执照名称
@@ -101,13 +101,13 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
                 List<PictureName> clPicNames = pictureNameDao.selectPicNameById(cl);
                 List<PictureName> cpPicNames = pictureNameDao.selectPicNameById(cp);
                 for(PictureName pictureName :cblPicNames){
-                    pictureName.setPictureName(upLoadImg.getUrl() + "/" + pictureName.getPictureName());
+                    pictureName.setPictureName(upLoadImg.getCompanyImgUrl() + "/" + pictureName.getPictureName());
                 }
                 for(PictureName pictureName :clPicNames){
-                    pictureName.setPictureName(upLoadImg.getUrl() + "/" + pictureName.getPictureName());
+                    pictureName.setPictureName(upLoadImg.getCompanyImgUrl() + "/" + pictureName.getPictureName());
                 }
                 for(PictureName pictureName :cpPicNames){
-                    pictureName.setPictureName(upLoadImg.getUrl() + "/" + pictureName.getPictureName());
+                    pictureName.setPictureName(upLoadImg.getCompanyImgUrl() + "/" + pictureName.getPictureName());
                 }
                 company.setCompany_business_license(cblPicNames);
                 company.setCompany_logo(clPicNames);
@@ -129,7 +129,7 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
                                    String company_type_id, String company_type_name, String parentId) {
         Result result = new Result();
         //上传路径
-        String path = upLoadImg.getPath();
+        String path = upLoadImg.getCompanyImgPath();
         //上传工具类
         UploadFileUtils uploadTools = new UploadFileUtils();
         //公司营业执照名称
@@ -185,13 +185,13 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
         List<PictureName> clPicNames = pictureNameDao.selectPicNameById(cl);
         List<PictureName> cpPicNames = pictureNameDao.selectPicNameById(cp);
         for(PictureName pictureName :cblPicNames){
-            pictureName.setPictureName(upLoadImg.getUrl() + "/" + pictureName.getPictureName());
+            pictureName.setPictureName(upLoadImg.getCompanyImgUrl() + "/" + pictureName.getPictureName());
         }
         for(PictureName pictureName :clPicNames){
-            pictureName.setPictureName(upLoadImg.getUrl() + "/" + pictureName.getPictureName());
+            pictureName.setPictureName(upLoadImg.getCompanyImgUrl() + "/" + pictureName.getPictureName());
         }
         for(PictureName pictureName :cpPicNames){
-            pictureName.setPictureName(upLoadImg.getUrl() + "/" + pictureName.getPictureName());
+            pictureName.setPictureName(upLoadImg.getCompanyImgUrl() + "/" + pictureName.getPictureName());
         }
         company.setCompany_business_license(cblPicNames);
         company.setCompany_logo(clPicNames);
@@ -206,7 +206,7 @@ public class CompanyServiceImpl extends ApplicationObjectSupport implements Comp
     public Result deleteCompanyPic(String pictureId, String pictureName) {
         Result result = new Result();
         //上传路径
-        String path = upLoadImg.getPath();
+        String path = upLoadImg.getCompanyImgPath();
         //删除图片
         UploadFileUtils.deleteOneFile(path + File.separator + pictureName);
         int i = pictureNameDao.deleteCompanyPic(pictureId, pictureName);

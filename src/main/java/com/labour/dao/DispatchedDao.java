@@ -1,5 +1,7 @@
 package com.labour.dao;
 
+import com.labour.entity.WorkAudit;
+import com.labour.entity.WorkReview;
 import com.labour.model.Dispatched;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -19,4 +21,21 @@ public interface DispatchedDao {
     Dispatched selectOneDispatched(@Param("workAuditId") String workAuditId);
 
     int updateWorkAuditIdIsOk(@Param("isOk") String isOk, @Param("audit_info") String audit_info, @Param("workAuditStatus") String workAuditStatus, @Param("workAuditId") String workAuditId);
+
+    int updateUserJobStatus(@Param("userJobId") String userJobId, @Param("jobStatusId") String jobStatusId, @Param("jobStatus") String jobStatus, @Param("jobStatusTypeId") String jobStatusTypeId,
+                            @Param("jobStatusType") String jobStatusType, @Param("jobStatusReasonId") String jobStatusReasonId, @Param("jobStatusReason") String jobStatusReason, @Param("jobStatusExplain") String jobStatusExplain);
+
+    int updateWorkReviewStatus(@Param("workReviewId") String workReviewId, @Param("workAuditCurrentNode") String workAuditCurrentNode, @Param("workReviewStatus") String workReviewStatus);
+
+    int insertOneWorkAudit(WorkAudit workAudit);
+
+    int insertOneWorkReview(WorkReview workReview);
+
+    WorkAudit selectOneWorkAudit(@Param("workAuditId") String workAuditId);
+
+    WorkReview selectOneWorkReview(@Param("workReviewId") String workReviewId);
+
+    WorkAudit selectWorkAuditByStatus(@Param("workReviewId") String workReviewId, @Param("workAuditStatus") String workAuditStatus);
+
+    int updateAuditCurrentNode(@Param("workReviewId") String workReviewId, @Param("workAuditCurrentNode") String workAuditCurrentNode);
 }

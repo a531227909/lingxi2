@@ -12,9 +12,26 @@
 		VALUES (#{user_id}, #{user_name},#{company_id}, #{company_full_name})
 	</insert>
 
+	<insert id="addOneUserCompany" parameterType="com.labour.entity.UserCompany">
+	<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+		SELECT last_insert_id()
+	</selectKey>
+	INSERT INTO `user_company` (user_id, user_name, company_id, company_full_name)
+	VALUES (#{user_id}, #{user_name},#{company_id}, #{company_full_name})
+</insert>
+
 	<select id="selectOneUser" resultType="com.labour.entity.User" parameterType="java.lang.String">
-		select user_id,user_name,password,name,user_type_id,create_user_id,create_user_name,create_time,update_time,status FROM user
+		select user_id,user_name,password,name,petName,weChatId,headImage,genderId,genderName,nationId,nation,educationId,education,province_code,province_name,city_code,
+			   city_name,county_code,county_name,address,idCard,idCardFront,idCardReverse,phoneNum,user_type_id,create_user_id,create_user_name,create_time,update_time,status
+		FROM user
 		where user_name=#{user_name};
+	</select>
+
+	<select id="selectOneUserById" resultType="com.labour.entity.User" parameterType="java.lang.String">
+		select user_id,user_name,password,name,petName,weChatId,headImage,genderId,genderName,nationId,nation,educationId,education,province_code,province_name,city_code,
+			   city_name,county_code,county_name,address,idCard,idCardFront,idCardReverse,phoneNum,user_type_id,create_user_id,create_user_name,create_time,update_time,status
+		FROM user
+		where user_id=#{user_id};
 	</select>
 
 	<select id="selectAllUserType" resultType="com.labour.model.UserType" parameterType="java.lang.String">
@@ -94,5 +111,61 @@
 		ON ut.user_type_id = ucc.user_type_id
 		WHERE ut.status = #{status} GROUP BY ut.user_type_id ORDER BY ut.user_type_id;
 	</select>
+
+	<insert id="addWeChatUser" parameterType="java.lang.String">
+		INSERT INTO `user` (weChatId, headImage, petName, user_type_id, status)
+		VALUES (#{weChatId}, #{headImage}, #{petName}, #{user_type_id}, #{status})
+	</insert>
+
+	<select id="selectOneWechatUser" resultType="com.labour.entity.User" parameterType="java.lang.String">
+		select user_id,user_name,password,name,petName,weChatId,headImage,user_type_id,create_user_id,create_user_name,create_time,update_time,status FROM user
+		where weChatId=#{weChatId};
+	</select>
+
+	<update id="userRegister" parameterType="java.lang.String">
+		update user
+		<trim prefix="set" suffixOverrides=",">
+			<if test=" name !=null and name !='' ">
+				name = #{name},
+			</if>
+			<if test=" phoneNum !=null and phoneNum !='' ">
+				phoneNum = #{phoneNum},
+			</if>
+			<if test=" idCard !=null and idCard !='' ">
+				idCard = #{idCard},
+			</if>
+			<if test=" genderId !=null and genderId !='' ">
+				genderId = #{genderId},
+			</if>
+			<if test=" genderName !=null and genderName !='' ">
+				genderName = #{genderName},
+			</if>
+			<if test=" province_code !=null and province_code !='' ">
+				province_code = #{province_code},
+			</if>
+			<if test=" province_name !=null and province_name !='' ">
+				province_name = #{province_name},
+			</if>
+			<if test=" city_code !=null and city_code !='' ">
+				city_code = #{city_code},
+			</if>
+			<if test=" city_name !=null and city_name !='' ">
+				city_name = #{city_name},
+			</if>
+			<if test=" county_code !=null and county_code !='' ">
+				county_code = #{county_code},
+			</if>
+			<if test=" county_name !=null and county_name !='' ">
+				county_name = #{county_name},
+			</if>
+			<if test=" idCardFront !=null and idCardFront !='' ">
+				idCardFront = #{idCardFront},
+			</if>
+			<if test=" idCardReverse !=null and idCardReverse !='' ">
+				idCardReverse = #{idCardReverse},
+			</if>
+		</trim>
+		WHERE user_id = #{user_id}
+	</update>
 
 </mapper>

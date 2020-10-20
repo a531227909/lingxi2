@@ -91,4 +91,18 @@ public class DoLoginController {
         return result;
     }
 
+    @RequestMapping(value="/doWechatLogin")
+    @ResponseBody
+    public Result doWechatLogin(HttpServletRequest req, String weChatId, String headImage, String petName){
+        Result result = new Result();
+        if(StringUtils.isBlank(weChatId)){
+            result.setCode("1001");
+            result.setMsg("微信唯一ID不能为空");
+            return result;
+        }
+        String ip = HttpRequestUtils.getIp2(req);
+        result = loginService.doWechatLogin(weChatId, headImage, petName, ip);
+        return result;
+    }
+
 }

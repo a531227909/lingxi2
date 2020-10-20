@@ -3,91 +3,105 @@
 <mapper namespace="com.labour.dao.DispatchedDao">
 
 	<select id="selectDispatchedByFactor" resultType="com.labour.model.Dispatched" parameterType="java.lang.String">
-		select wa.workAuditId,wa.workReviewId,wa.flow_node_id,wa.user_id as auditUserId,wa.name as auditName,wa.user_type_id,wa.user_type_name,wa.approvalTypeId,wa.approvalType,wa.isOk,wa.audit_info,wa.workAuditStatus,wr.user_id,wr.userJobId,wr.workReviewTypeId,wr.workReviewType,wr.name,wr.company_id,wr.company_full_name,wr.usingCompanyId,wr.usingCompanyName,wr.reviewReason,wr.workAuditCurrentNode,wr.workReviewStatus,uj.user_company_id,uj.startJobTime,uj.endJobTime,uj.promoteTeamId,uj.promoteTeam,uj.resident,uj.residentName,uj.province_code,uj.province_name,uj.city_code,uj.city_name,uj.county_code,uj.county_name,uj.address,uj.stationName,uj.workersPrice,uj.salaryTypeId,uj.salaryTypeName,uj.shiftSystemName,uj.shiftSystemId,uj.operationModeName,uj.operationModeId,uj.workClothesName,uj.workClothesId,uj.welfareMemberId,uj.welfareMembers,uj.startWorkTime,uj.endWorkTime,uj.jobRequirements,u.idCard,u.phoneNum from work_audit wa
-		    left JOIN work_review wr on wa.workReviewId = wr.workReviewId
-		    left join user_job uj on wr.userJobId = uj.userJobId
-			left join user u on uj.user_id=u.user_id
+		SELECT wa.workAuditId,wa.workReviewId,wa.flow_node_id,wa.auditUserId ,wa.auditName ,wa.user_type_id,wa.user_type_name,wa.approvalTypeId,wa.approvalType,
+		       wa.isOk,wa.audit_info,wa.workAuditStatus,wr.user_id,wr.userJobId,wr.workReviewTypeId,wr.workReviewType,wr.name,wr.company_id,wr.company_full_name,wr.usingCompanyId,
+		       wr.usingCompanyName,wr.reviewReason,wr.workAuditCurrentNode,wr.workReviewStatus,uj.user_company_id,uj.startJobTime,uj.endJobTime,uj.promoteTeamId,uj.promoteTeam,
+		       uj.resident,uj.residentName,uj.province_code,uj.province_name,uj.city_code,uj.city_name,uj.county_code,uj.county_name,uj.address,uj.stationName,uj.workersPrice,
+		       uj.salaryTypeId,uj.salaryTypeName,uj.shiftSystemName,uj.shiftSystemId,uj.operationModeName,uj.operationModeId,uj.workClothesName,uj.workClothesId,uj.welfareMemberId,
+		       uj.welfareMembers,uj.startWorkTime,uj.endWorkTime,uj.jobRequirements,uj.jobStatusId,uj.jobStatus,uj.jobStatusTypeId,uj.jobStatusType,uj.jobStatusReasonId,
+		       uj.jobStatusReason,uj.jobStatusExplain,u.idCard,u.phoneNum,u.genderId,u.genderName,u.nation,u.education,u.idCardFront,u.idCardReverse
+		FROM work_audit wa
+		LEFT JOIN work_review wr ON wa.workReviewId = wr.workReviewId
+		LEFT JOIN user_job uj ON wr.userJobId = uj.userJobId
+		LEFT JOIN user u ON uj.user_id=u.user_id
 		<where>
 			<if test=" workAuditStatus !=null and workAuditStatus !='' ">
-				and wa.workAuditStatus = #{workAuditStatus}
+				AND wa.workAuditStatus = #{workAuditStatus}
 			</if>
 			<if test=" company_id !=null and company_id !='' ">
-				and wr.company_id = #{company_id}
+				AND wr.company_id = #{company_id}
 			</if>
 			<if test=" name !=null and name !='' ">
-				and wr.name = #{name}
+				AND wr.name = #{name}
 			</if>
 			<if test=" phoneNum !=null and phoneNum !='' ">
-				and u.phoneNum = #{phoneNum}
+				AND u.phoneNum = #{phoneNum}
 			</if>
 			<if test=" province_code !=null and province_code !='' ">
-				and uj.province_code = #{province_code}
+				AND uj.province_code = #{province_code}
 			</if>
 			<if test=" city_code !=null and city_code !='' ">
-				and uj.city_code = #{city_code}
+				AND uj.city_code = #{city_code}
 			</if>
 			<if test=" usingCompanyId !=null and usingCompanyId !='' ">
-				and wr.usingCompanyId = #{usingCompanyId}
+				AND wr.usingCompanyId = #{usingCompanyId}
 			</if>
 			<if test=" stationName !=null and stationName !='' ">
-				and wr.stationName = #{stationName}
+				AND wr.stationName = #{stationName}
 			</if>
 			<if test=" workReviewTypeId !=null and workReviewTypeId !='' ">
-				and wr.workReviewTypeId = #{workReviewTypeId}
+				AND wr.workReviewTypeId = #{workReviewTypeId}
 			</if>
 			<if test=" user_id !=null and user_id !='' ">
-				and wr.user_id = #{user_id}
+				AND wr.user_id = #{user_id}
 			</if>
 		</where>
 		LIMIT #{star_num},#{pageSize}
 	</select>
 
 	<select id="selectCountByFactor" resultType="java.lang.Integer" parameterType="java.lang.String">
-		select count(*) from work_audit wa
-		left JOIN work_review wr on wa.workReviewId = wr.workReviewId
-		left join user_job uj on wr.userJobId = uj.userJobId
-		left join user u on uj.user_id=u.user_id
+		SELECT count(*) FROM work_audit wa
+		LEFT JOIN work_review wr ON wa.workReviewId = wr.workReviewId
+		LEFT JOIN user_job uj ON wr.userJobId = uj.userJobId
+		LEFT JOIN user u ON uj.user_id=u.user_id
 		<where>
 			<if test=" workAuditStatus !=null and workAuditStatus !='' ">
-				and wa.workAuditStatus = #{workAuditStatus}
+				AND wa.workAuditStatus = #{workAuditStatus}
 			</if>
 			<if test=" company_id !=null and company_id !='' ">
-				and wr.company_id = #{company_id}
+				AND wr.company_id = #{company_id}
 			</if>
 			<if test=" name !=null and name !='' ">
-				and wr.name = #{name}
+				AND wr.name = #{name}
 			</if>
 			<if test=" phoneNum !=null and phoneNum !='' ">
-				and u.phoneNum = #{phoneNum}
+				AND u.phoneNum = #{phoneNum}
 			</if>
 			<if test=" province_code !=null and province_code !='' ">
-				and uj.province_code = #{province_code}
+				AND uj.province_code = #{province_code}
 			</if>
 			<if test=" city_code !=null and city_code !='' ">
-				and uj.city_code = #{city_code}
+				AND uj.city_code = #{city_code}
 			</if>
 			<if test=" usingCompanyId !=null and usingCompanyId !='' ">
-				and wr.usingCompanyId = #{usingCompanyId}
+				AND wr.usingCompanyId = #{usingCompanyId}
 			</if>
 			<if test=" stationName !=null and stationName !='' ">
-				and wr.stationName = #{stationName}
+				AND wr.stationName = #{stationName}
 			</if>
 			<if test=" user_id !=null and user_id !='' ">
-				and wr.user_id = #{user_id}
+				AND wr.user_id = #{user_id}
 			</if>
 		</where>
 	</select>
 
 	<select id="selectOneDispatched" resultType="com.labour.model.Dispatched" parameterType="java.lang.String">
-		select wa.workAuditId,wa.workReviewId,wa.flow_node_id,wa.user_id as auditUserId,wa.name as auditName,wa.user_type_id,wa.user_type_name,wa.approvalTypeId,wa.approvalType,wa.isOk,wa.audit_info,wa.workAuditStatus,wr.user_id,wr.userJobId,wr.workReviewTypeId,wr.workReviewType,wr.name,wr.company_id,wr.company_full_name,wr.usingCompanyId,wr.usingCompanyName,wr.reviewReason,wr.workAuditCurrentNode,wr.workReviewStatus,uj.user_company_id,uj.startJobTime,uj.endJobTime,uj.promoteTeamId,uj.promoteTeam,uj.resident,uj.residentName,uj.province_code,uj.province_name,uj.city_code,uj.city_name,uj.county_code,uj.county_name,uj.address,uj.stationName,uj.workersPrice,uj.salaryTypeId,uj.salaryTypeName,uj.shiftSystemName,uj.shiftSystemId,uj.operationModeName,uj.operationModeId,uj.workClothesName,uj.workClothesId,uj.welfareMemberId,uj.welfareMembers,uj.startWorkTime,uj.endWorkTime,uj.jobRequirements,u.idCard,u.phoneNum,u.genderName,u.nation,u.education,u.idCardFront,u.idCardReverse from work_audit wa
-		left JOIN work_review wr on wa.workReviewId = wr.workReviewId
-		left join user_job uj on wr.userJobId = uj.userJobId
-		left join user u on uj.user_id=u.user_id
+		SELECT wa.workAuditId,wa.workReviewId,wa.flow_node_id,wa.auditUserId ,wa.auditName ,wa.user_type_id,wa.user_type_name,wa.approvalTypeId,wa.approvalType,
+		       wa.isOk,wa.audit_info,wa.workAuditStatus,wr.user_id,wr.userJobId,wr.workReviewTypeId,wr.workReviewType,wr.name,wr.company_id,wr.company_full_name,wr.usingCompanyId,
+		       wr.usingCompanyName,wr.reviewReason,wr.workAuditCurrentNode,wr.workReviewStatus,uj.user_company_id,uj.startJobTime,uj.endJobTime,uj.promoteTeamId,uj.promoteTeam,
+		       uj.resident,uj.residentName,uj.province_code,uj.province_name,uj.city_code,uj.city_name,uj.county_code,uj.county_name,uj.address,uj.stationName,uj.workersPrice,
+		       uj.salaryTypeId,uj.salaryTypeName,uj.shiftSystemName,uj.shiftSystemId,uj.operationModeName,uj.operationModeId,uj.workClothesName,uj.workClothesId,uj.welfareMemberId,
+		       uj.welfareMembers,uj.startWorkTime,uj.endWorkTime,uj.jobRequirements,uj.jobStatusId,uj.jobStatus,uj.jobStatusTypeId,uj.jobStatusType,uj.jobStatusReasonId,
+			   uj.jobStatusReason,uj.jobStatusExplain,u.idCard,u.phoneNum,u.genderId,u.genderName,u.nation,u.education,u.idCardFront,u.idCardReverse
+		FROM work_audit wa
+		LEFT JOIN work_review wr ON wa.workReviewId = wr.workReviewId
+		LEFT join user_job uj ON wr.userJobId = uj.userJobId
+		LEFT join user u ON uj.user_id=u.user_id
 		WHERE wa.workAuditId = #{workAuditId}
 	</select>
 	
 	<update id="updateWorkAuditIdIsOk" parameterType="java.lang.String">
-		update work_audit
+		UPDATE work_audit
 		<trim prefix="set" suffixOverrides=",">
 			<if test=" isOk !=null and isOk !='' ">
 				isOk = #{isOk},
@@ -100,6 +114,95 @@
 			</if>
 		</trim>
 		WHERE workAuditId = #{workAuditId}
+	</update>
+
+	<update id="updateUserJobStatus" parameterType="java.lang.String">
+		UPDATE user_job
+		<trim prefix="set" suffixOverrides=",">
+			<if test=" jobStatusId !=null and jobStatusId !='' ">
+				jobStatusId = #{jobStatusId},
+			</if>
+			<if test=" jobStatus !=null and jobStatus !='' ">
+				jobStatus = #{jobStatus},
+			</if>
+			<if test=" jobStatusTypeId !=null and jobStatusTypeId !='' ">
+				jobStatusTypeId = #{jobStatusTypeId},
+			</if>
+			<if test=" jobStatusType !=null and jobStatusType !='' ">
+				jobStatusType = #{jobStatusType},
+			</if>
+			<if test=" jobStatusReasonId !=null and jobStatusReasonId !='' ">
+				jobStatusReasonId = #{jobStatusReasonId},
+			</if>
+			<if test=" jobStatusReason !=null and jobStatusReason !='' ">
+				jobStatusReason = #{jobStatusReason},
+			</if>
+			<if test=" jobStatusExplain !=null and jobStatusExplain !='' ">
+				jobStatusExplain = #{jobStatusExplain},
+			</if>
+		</trim>
+		WHERE userJobId = #{userJobId}
+	</update>
+
+	<update id="updateWorkReviewStatus" parameterType="java.lang.String">
+		UPDATE work_review
+		<trim prefix="set" suffixOverrides=",">
+			<if test=" jobStatusId !=null and jobStatusId !='' ">
+				workAuditCurrentNode = #{workAuditCurrentNode},
+			</if>
+			<if test=" jobStatus !=null and jobStatus !='' ">
+				workReviewStatus = #{workReviewStatus},
+			</if>
+		</trim>
+		WHERE workReviewId = #{workReviewId}
+	</update>
+
+	<insert id="insertOneWorkAudit" parameterType="com.labour.entity.WorkAudit">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			SELECT last_insert_id()
+		</selectKey>
+		INSERT INTO work_audit (workReviewId, flow_node_id, auditUserId, auditName, user_type_id, user_type_id, user_type_name, approvalTypeId, approvalType,
+								isOk, audit_info, audit_info, workAuditStatus)
+		VALUES (#{workReviewId}, #{flow_node_id}, #{auditUserId}, #{auditName}, #{user_type_id},#{user_type_id}, #{user_type_name}, #{approvalTypeId}, #{approvalType},
+				#{isOk}, #{audit_info}, #{audit_info}, #{workAuditStatus});
+	</insert>
+
+	<insert id="insertOneWorkReview" parameterType="com.labour.entity.WorkReview">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			SELECT last_insert_id()
+		</selectKey>
+		INSERT INTO work_review (user_id, userJobId, workReviewTypeId, workReviewType, name, company_id, company_full_name, usingCompanyId, usingCompanyName,
+								 reviewReason, workAuditCurrentNode, workReviewStatus)
+		VALUES (#{user_id}, #{userJobId}, #{workReviewTypeId}, #{workReviewType}, #{name},#{company_id}, #{company_full_name}, #{usingCompanyId}, #{usingCompanyName},
+				#{reviewReason}, #{workAuditCurrentNode}, #{workReviewStatus});
+	</insert>
+
+	<select id="selectOneWorkAudit" resultType="com.labour.entity.WorkAudit" parameterType="java.lang.String">
+		SELECT workAuditId, workReviewId, flow_node_id, auditUserId, auditName, user_type_id, user_type_name, approvalTypeId, approvalType, isOk, audit_info,
+		       create_time, update_time, workAuditStatus
+		FROM work_audit WHERE workAuditId = #{workAuditId}
+	</select>
+
+	<select id="selectOneWorkReview" resultType="com.labour.entity.WorkAudit" parameterType="java.lang.String">
+		SELECT workReviewId, user_id, userJobId, workReviewTypeId, workReviewType, name, company_id, company_full_name, usingCompanyId, usingCompanyName, reviewReason,
+			   workAuditCurrentNode, workReviewStatus, create_time, update_time
+		FROM work_review WHERE workReviewId = #{workReviewId}
+	</select>
+
+	<select id="selectWorkAuditByStatus" resultType="com.labour.entity.WorkAudit" parameterType="java.lang.String">
+		SELECT workAuditId, workReviewId, flow_node_id, auditUserId, auditName, user_type_id, user_type_name, approvalTypeId, approvalType, isOk, audit_info,
+			   create_time, update_time, workAuditStatus
+		FROM work_audit WHERE workReviewId = #{workReviewId} AND workAuditStatus = #{workAuditStatus}
+	</select>
+
+	<update id="updateAuditCurrentNode" parameterType="java.lang.String">
+		UPDATE work_review
+		<trim prefix="set" suffixOverrides=",">
+			<if test=" workAuditCurrentNode !=null and workAuditCurrentNode !='' ">
+				workAuditCurrentNode = #{workAuditCurrentNode},
+			</if>
+		</trim>
+		WHERE workReviewId = #{workReviewId}
 	</update>
 
 </mapper>

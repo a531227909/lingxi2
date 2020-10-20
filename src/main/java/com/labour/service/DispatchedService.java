@@ -13,4 +13,7 @@ public interface DispatchedService {
 
     Result updateWorkAuditIdIsOk(String isOk, String audit_info, String workAuditStatus, String workAuditId);
 
+    Result updateUserJobStatus(String userJobId, String jobStatusId, String jobStatus, String jobStatusTypeId, String jobStatusType, String jobStatusReasonId,
+                               String jobStatusReason, String jobStatusExplain);
+
 }
